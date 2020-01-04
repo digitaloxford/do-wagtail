@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
-{% block body_class %}home{% endblock %}
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
+
+{% image page.banner_image width-1200 %}
 
 {% block content %}
 {{ page.intro|richtext }}
