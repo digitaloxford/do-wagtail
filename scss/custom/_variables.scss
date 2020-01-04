@@ -1,0 +1,25 @@
+// Colours
+$white: rgb(255, 255, 255);
+$deep_black: rgb(0, 0, 0);
+$black: rgb(51, 51, 51);
+
+// Digital Oxford
+$dark-grey: #4e4e4e;
+$grey: rgb(130, 130, 130);
+$light-grey: #e5e6ea;
+$lighter-grey: #eff0f2;
+$green: #21383A;
+$teal: #6fbec5;
+$yellow-darker: #c5b303;
+$yellow-lighter: #e5d003;
+$yellow: #E8E316;
+$gold: #c5b303;
+
+// Typography
+$font-family-body: "PT Sans", Arial, Helvetica, sans-serif;
+$font-family-header: 'Montserrat', sans-serif;
+
+$modularscale: (
+    base: 1rem,
+    ratio: 1.25 // 4:5 Major Third
+);
