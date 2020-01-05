@@ -1,5 +1,4 @@
-{% load static wagtailuserbar %}
-{% load menu_tags %}
+{% load static wagtailuserbar menu_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -15,8 +14,30 @@
                 {% endwith %}
             {% endblock %}
         </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A technology, design, and creative community for Oxfordshire">
+
+        <!-- Open Graph data -->
+        <meta property="og:title" content="Digital Oxford">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://digitaloxford.com">
+        <meta property="og:description" content="A technology, design, and creative community for Oxfordshire">
+        <!-- Social sharing meta -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="Digital Oxford">
+        <meta name="twitter:site" content="@digitaloxford">
+        <meta name="twitter:creator" content="@digitaloxford">
+        <meta name="twitter:description" content="A technology, design, and creative community for Oxfordshire">
+        <!-- Icon and Manifest -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'site.webmanifest' %}">
+        <link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffc40d">
+        <meta name="theme-color" content="#ffffff">
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|PT+Sans&display=swap" rel="stylesheet">
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/digitaloxford.css' %}">
@@ -43,8 +64,6 @@
             {% block content %}{% endblock %}
 
         </main>
-
-
 
         <footer class="layout-global layout-footer">
 
