@@ -2,9 +2,7 @@
 
 {% load wagtailcore_tags %}
 
-{% block body_class %}
-{{ page.title|slugify }}
-{% endblock %}
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
 
 {% block content %}
 {{ page.body|richtext }}
