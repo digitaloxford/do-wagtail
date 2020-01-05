@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}{{ page.title|slugify }}{% endblock %}
 
-{% image page.banner_image width-1200 %}
-
 {% block content %}
-{{ page.intro|richtext }}
+{% image page.banner_image width-1200 as background_image %}
+<div class="figure-image width-full overlay" style="background-image: url('{{ background_image.url }}');">
+    <div class="overlay-text">
+        {{ page.intro|richtext }}
+    </div>
+</div>
 {{ page.body|richtext }}
 {% endblock %}
