@@ -14,6 +14,8 @@ class BasicPage(Page):
     ]
 
 class HomePage(Page):
+    subpage_types = ['BasicPage']
+
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
