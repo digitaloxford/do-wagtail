@@ -1,25 +1,55 @@
-# Logs
+# Web Logs
 /htdocs/stats
 /logs
 
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
 # Misc
-*.swp
-*.pyc
 .DS_Store
-/.coverage
-/dist/
-/build/
-/MANIFEST
-/wagtail.egg-info/
-/docs/_build/
-/.tox/
-/venv
-/node_modules/
-npm-debug.log*
 *.idea/
-/*.egg/
+*.pyc
+*.swp
 /.cache/
+/.coverage
 /.pytest_cache/
+/.tox/
+/*.egg/
+/build/
+/docs/_build/
+/MANIFEST
+/node_modules/
+/wagtail.egg-info/
+npm-debug.log*
+
+# Distribution / packaging
+.eggs/
+.installed.cfg
+.Python build/
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Environments
+.env
+.venv
+env.bak/
+env/
+ENV/
+venv.bak/
+venv/
 
 # vscode
 .vscode
