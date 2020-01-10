@@ -6,8 +6,6 @@ SESSION_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-SECRET_KEY = os.environ['SECRET_KEY']
-
 ALLOWED_HOSTS = ['.digitaloxford.com']
 
 TEMPLATES += [
@@ -38,6 +36,7 @@ TEMPLATES += [
 # EMAIL_USE_TLS = True
 
 try:
+    # Import local settings, excluded by .gitignore
     from .local import *
 except ImportError:
     pass
