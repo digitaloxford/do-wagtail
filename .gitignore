@@ -1,5 +1,6 @@
 # Local environment settings
 digitaloxford/local.py
+digitaloxford/env.py
 
 # Web Logs
 /htdocs/stats
@@ -44,6 +45,7 @@ parts/
 sdist/
 var/
 wheels/
+/static
 
 # Environments
 .env
