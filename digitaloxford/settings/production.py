@@ -22,7 +22,7 @@ TEMPLATES = [
                     'django.template.loaders.app_directories.Loader',
                 ]),
             ],
-   	    'context_processors': [
+   	        'context_processors': [
                	'django.template.context_processors.debug',
                	'django.template.context_processors.request',
                	'django.contrib.auth.context_processors.auth',
