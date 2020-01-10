@@ -1,6 +1,5 @@
 # Local environment settings
-digitaloxford/local.py
-digitaloxford/env.py
+digitaloxford/settings/local.py
 
 # Web Logs
 /htdocs/stats

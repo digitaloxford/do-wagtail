@@ -11,9 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.path.exists(os.getcwd() + '/env.py'):
-    # env.py is excluded by .gitignore
-    from .env import *
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "digitaloxford.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "digitaloxford.settings.production")
 
 application = get_wsgi_application()
