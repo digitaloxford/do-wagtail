@@ -45,6 +45,7 @@ sdist/
 var/
 wheels/
 /static
+db.sqlite3
 
 # Environments
 .env
