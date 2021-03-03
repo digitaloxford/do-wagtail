@@ -6,28 +6,33 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
 
+
 class BasicPage(Page):
+    parent_page_types = ["HomePage"]
+    subpage_types = []
+
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
+        FieldPanel("body", classname="full"),
     ]
 
+
 class HomePage(Page):
-    subpage_types = ['BasicPage']
+    subpage_types = ["BasicPage"]
 
     banner_image = models.ForeignKey(
-        'wagtailimages.Image',
+        "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('banner_image'),
-        FieldPanel('intro', classname="intro"),
-        FieldPanel('body', classname="full"),
+        ImageChooserPanel("banner_image"),
+        FieldPanel("intro", classname="intro"),
+        FieldPanel("body", classname="full"),
     ]
