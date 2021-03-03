@@ -21,6 +21,7 @@ pip-delete-this-directory.txt
 /node_modules/
 /wagtail.egg-info/
 npm-debug.log*
+__pycache__
 
 # Distribution / packaging
 .eggs/
@@ -36,12 +37,10 @@ downloads/
 eggs/
 lib/
 lib64/
-parts/
 sdist/
 var/
 wheels/
 /static
-__pycache__
 
 # Environments
 .env
@@ -57,3 +56,4 @@ venv/
 
 # Data
 db.sqlite3
+/media
