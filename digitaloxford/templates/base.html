@@ -18,7 +18,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A technology, design, and creative community for Oxfordshire">
 
+    {% if request and self %}
     {% meta_tags %}
+    {% endif %}
 
     <!-- Icon and Manifest -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">

@@ -11,9 +11,7 @@ from wagtailmetadata.models import MetadataPageMixin
 
 @register_setting
 class SocialMediaSettings(BaseSetting):
-    twitter = models.CharField(
-        max_length=100, help_text="Twitter Username ", blank=True
-    )
+    twitter = models.CharField(max_length=100, help_text="Twitter Username", blank=True)
 
 
 class BasicPage(MetadataPageMixin, Page):
