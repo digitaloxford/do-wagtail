@@ -5,9 +5,18 @@ from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.images.models import Image
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtailmetadata.models import MetadataPageMixin
 
 
-class BasicPage(Page):
+@register_setting
+class SocialMediaSettings(BaseSetting):
+    twitter = models.CharField(
+        max_length=100, help_text="Twitter Username ", blank=True
+    )
+
+
+class BasicPage(MetadataPageMixin, Page):
     parent_page_types = ["HomePage"]
     subpage_types = []
 
@@ -18,7 +27,7 @@ class BasicPage(Page):
     ]
 
 
-class HomePage(Page):
+class HomePage(MetadataPageMixin, Page):
     subpage_types = ["BasicPage"]
 
     banner_image = models.ForeignKey(

@@ -1,4 +1,4 @@
-{% load static wagtailuserbar sass_tags menu_tags %}
+{% load static wagtailuserbar sass_tags menu_tags wagtailmetadata_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -18,17 +18,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A technology, design, and creative community for Oxfordshire">
 
-    <!-- Open Graph data -->
-    <meta property="og:title" content="Digital Oxford">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://digitaloxford.com">
-    <meta property="og:description" content="A technology, design, and creative community for Oxfordshire">
-    <!-- Social sharing meta -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Digital Oxford">
-    <meta name="twitter:site" content="@digitaloxford">
-    <meta name="twitter:creator" content="@digitaloxford">
-    <meta name="twitter:description" content="A technology, design, and creative community for Oxfordshire">
+    {% meta_tags %}
+
     <!-- Icon and Manifest -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
@@ -53,7 +44,7 @@
 
     <header class="layout-global layout-navigation">
         <div class="logo">
-            <a href="/"><img src="{% static 'img/dologomasterwhiteretina.png' %}" alt="Digital Oxford"></a>
+            <a href="/"><img src="{% static 'img/logo-do-white.png' %}" alt="Digital Oxford"></a>
         </div>
         <p class="strapline">A technology, design, and creative community for Oxfordshire</p>
     </header>

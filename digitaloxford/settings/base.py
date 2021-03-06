@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     "home",
     "search",
     "wagtail.contrib.modeladmin",
+    "wagtail.contrib.settings",
+    "wagtailmetadata",
     "wagtailmenus",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",

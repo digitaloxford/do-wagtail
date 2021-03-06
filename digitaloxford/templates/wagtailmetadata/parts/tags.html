@@ -1,0 +1,16 @@
+{% extends "wagtailmetadata/parts/tags.html" %}
+{% block twitter %}
+{{ block.super }}
+<meta name="twitter:site" content="@{{ settings.home.SocialMediaSettings.twitter }}" />
+<meta name="twitter:creator" content="@{{ settings.home.SocialMediaSettings.twitter }}" />
+{% endblock twitter %}
+{% block opengraph %}
+{{ block.super }}
+{% endblock opengraph %}
+{% block meta %}
+<meta itemprop="url" content="{{ object.get_meta_url }}" />
+<meta itemprop="name" content="{{ object.get_meta_title }}">
+<meta itemprop="description" content="{{ object.get_meta_description }}" />
+{% if meta_image %}
+<meta itemprop="image" content="{{meta_image}}" />{% endif %}
+{% endblock meta %}

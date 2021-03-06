@@ -1,4 +1,4 @@
-const version = 'V1.5';
+const version = 'V1.6';
 const staticCacheName = version + '-staticfiles';
 
 // Install event
@@ -11,13 +11,12 @@ addEventListener('install', installEvent => {
         .then(staticCache => {
             // Nice to haves (don't block installation)
             staticCache.addAll([
-                '/static/img/dologomasterwhiteretina.png',
+                '/static/img/logo-do-white.png',
                 '/static/img/oxford-radcliffe-camera-w1200h675.jpg'
             ]);
             // Must-haves return immeadiately
             return staticCache.addAll([
-                '/static/css/digitaloxford.css',
-                '/static/js/digitaloxford.js',
+                '/static/css/main.css',
                 '/static/offline.html'
             ]);
         })
@@ -63,7 +62,7 @@ addEventListener('fetch', fetchEvent => {
             return fetch(request)
             .catch(error => {
                 // But if it barfs, we're offline
-                return caches.match('/offline.html');
+                return caches.match('/static/offline.html');
             });
         })
     );
