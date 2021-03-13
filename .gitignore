@@ -22,6 +22,7 @@ pip-delete-this-directory.txt
 /wagtail.egg-info/
 npm-debug.log*
 __pycache__
+/logfile.txt
 
 # Distribution / packaging
 .eggs/
