@@ -41,7 +41,6 @@ lib64/
 sdist/
 var/
 wheels/
-/static
 
 # Environments
 .env
@@ -51,10 +50,9 @@ env/
 ENV/
 venv.bak/
 venv/
-
-# vscode
 .vscode
 
 # Data
 db.sqlite3
 /media
+/static
