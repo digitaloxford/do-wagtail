@@ -1,4 +1,4 @@
-# Digital Oxford Wagtail Install
+# Digital Oxford Wagtail Site
 
 The repository for the [Wagtail](https://docs.wagtail.io/en/stable/index.html) powered [Digital Oxford](https://digitaloxford.com) site.
 
