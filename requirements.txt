@@ -4,5 +4,5 @@ wagtailmenus>=3.0
 django-compressor==2.4
 django-sass-processor==0.8.*
 libsass==0.20.*
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
 wagtail-metadata==3.4.0
