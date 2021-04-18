@@ -1,8 +1,11 @@
 {% extends "wagtailmetadata/parts/tags.html" %}
+{% load wagtailsettings_tags %}
+{% get_settings %}
+
 {% block twitter %}
 {{ block.super }}
-<meta name="twitter:site" content="@{{ settings.home.SocialMediaSettings.twitter }}" />
-<meta name="twitter:creator" content="@{{ settings.home.SocialMediaSettings.twitter }}" />
+<meta name="twitter:site" content="@digitaloxford" />
+<meta name="twitter:creator" content="@digitaloxford" />
 {% endblock twitter %}
 {% block opengraph %}
 {{ block.super }}
