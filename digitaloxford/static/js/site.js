@@ -13,4 +13,3 @@ if (navigator.serviceWorker) {
             console.error('Failure!', error);
         });
 }
-

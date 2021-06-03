@@ -6,8 +6,8 @@ The repository for the [Wagtail](https://docs.wagtail.io/en/stable/index.html) p
 ## Notes
 
 - Requires Python 3.*
-- This project uses [django-sass-processor](https://github.com/jrief/django-sass-processor) to manage scss files. Refer to that repository's README for instructions on how to manage the files. 
-- Code formatting is controlled by [Black](https://black.readthedocs.io/en/stable/index.html). At some point that will probably become automated. 
+- This project uses [django-sass-processor](https://github.com/jrief/django-sass-processor) to manage scss files. Refer to that repository's README for instructions on how to manage the files.
+- Code formatting is controlled by [Black](https://black.readthedocs.io/en/stable/index.html). At some point that will probably become automated.
 
 
 ## Local setup
@@ -50,4 +50,3 @@ Finally, start the server:
 ```
 $ ./manage.py runserver
 ```
-
