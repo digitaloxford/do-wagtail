@@ -31,18 +31,18 @@ Install requirements:
 $ pip install -r requirements.txt
 ```
 
+Create a local secrets file at `<install-directory>/digitaloxford/settings/local.py` with the following format:
+
+```
+SECRET_KEY = 'some random hash'
+```
+
 Run the migrations and create the superuser:
 
 ```
 $ ./manage.py makemigrations
 $ ./manage.py migrate
 $ ./manage.py createsuperuser
-```
-
-Create a local secrets file at `<install-directory>/digitaloxford/settings/local.py` with the following format:
-
-```
-SECRET_KEY = 'some random hash'
 ```
 
 Finally, start the server:
