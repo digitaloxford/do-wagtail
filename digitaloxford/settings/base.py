@@ -90,7 +90,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "digitaloxford.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -101,6 +100,8 @@ DATABASES = {
     }
 }
 
+# Explicitly set primary keys for Django 3.2 upgrade
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
