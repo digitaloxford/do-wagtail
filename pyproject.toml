@@ -1,0 +1,27 @@
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+force-exclude = '''
+/(
+    _build
+  | \.direnv
+  | \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.nox
+  | \.svn
+  | \.tox
+  | \.venv
+  | buck-out
+  | build
+  | dist
+  | env
+  | logs
+  | media
+  | migrations
+  | static
+  | venv
+)/
+'''
