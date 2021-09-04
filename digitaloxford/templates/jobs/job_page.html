@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}page-job {{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    <ul class="job-meta">
+        <li class="job-closing-date"><span>Closing date:</span> {{ page.closing_date|date:"jS F Y"}}</li>
+        <li class="job-type"><span>Job Type:</span> {{ page.get_job_type_display }}</li>
+        <li class="job-salary"><span>Salary / Rate:</span> {{ page.salary}}</li>
+    </ul>
+
+    <p class="job-poster">Posted by <a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></p>
+
+    <h2 class="job-short-description">
+        {{ page.short_description }}
+    </h2>
+
+    <div class="job-description">
+        {{ page.description|richtext }}
+    </div>
+
+
+    <h3>Actions</h3>
+    <ul class="job-actions">
+        <li><a href="{{ page.job_link }}">Apply for position</a> (external link)</li>
+        <li><a href="mailto:{{ page.email }}">Email for more information</a> (email link)</li>
+    </ul>
+
+{% endblock %}

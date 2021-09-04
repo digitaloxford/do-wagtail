@@ -2,6 +2,14 @@
 $white: rgb(255, 255, 255);
 $deep_black: rgb(0, 0, 0);
 $black: rgb(51, 51, 51);
+$messages-info-bg: #D9EDF7;
+$messages-info-color: #31708F;
+$messages-success-bg: #DFF2BF;
+$messages-success-color: #4F8A10;
+$messages-warning-bg: #FEEFB3;
+$messages-warning-color: #9F6000;
+$messages-error-bg: #FFBABA;
+$messages-error-color: #D8000C;
 
 // Digital Oxford
 $dark-grey: #4e4e4e;
@@ -16,7 +24,7 @@ $yellow: #E8E316;
 $gold: #c5b303;
 
 // Typography
-$font-family-body: "PT Sans", Arial, Helvetica, sans-serif;
+$font-family-body: "PT Sans", Helvetica, sans-serif;
 $font-family-header: 'Montserrat', sans-serif;
 
 $modularscale: (

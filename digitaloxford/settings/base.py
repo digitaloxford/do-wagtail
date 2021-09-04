@@ -20,14 +20,16 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+# Set secret key
+SECRET_KEY = os.getenv("SECRET_KEY")
 
+# Required for registration
+SITE_ID = 1
 
 # Application definition
-
 INSTALLED_APPS = [
     "home",
+    "jobs",
     "search",
     "users",
     "wagtail.contrib.modeladmin",
@@ -53,9 +55,12 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sites",
     "django.contrib.staticfiles",
-    "django_extensions",
-    "coverage",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "anymail",
 ]
 
 MIDDLEWARE = [
@@ -96,10 +101,21 @@ WSGI_APPLICATION = "digitaloxford.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.getenv("DB_NAME", None),
+        "USER": os.getenv("DB_USER", None),
+        "PASSWORD": os.getenv("DB_PASSWORD", None),
+        "HOST": os.getenv("DB_HOST", None),
+        "PORT": os.getenv("DB_PORT", None),
     }
 }
 
@@ -125,6 +141,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+
+ADMINS = [("Digital Oxford Admin", "hello@digitaloxford.com")]
+DEFAULT_FROM_EMAIL = "hello@digitaloxford.com"
+SERVER_EMAIL = "server@digitaloxford.com"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -174,7 +195,6 @@ MEDIA_URL = "/media/"
 
 
 # Wagtail settings
-
 WAGTAIL_SITE_NAME = "digitaloxford"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
@@ -182,7 +202,7 @@ WAGTAIL_SITE_NAME = "digitaloxford"
 BASE_URL = "https://digitaloxford.com"
 
 # Custom settings
-DATE_FORMAT = "Y-m-d"
+DATE_FORMAT = "jS F Y"
 
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
     "default": {
@@ -202,6 +222,17 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
         },
     }
 }
+
+WAGTAIL_USER_CREATION_FORM = "users.forms.WagtailUserCreationForm"
+WAGTAIL_USER_EDIT_FORM = "users.forms.WagtailUserEditForm"
+WAGTAIL_USER_CUSTOM_FIELDS = [
+    "display_name",
+]
+WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = "hello@digitaloxford.com"
+
+# Django-taggit configuration
+TAG_LIMIT = 6
+TAGGIT_CASE_INSENSITIVE = True
 
 # Logging
 LOGGING = {
@@ -244,4 +275,37 @@ LOGGING = {
             "level": "DEBUG",
         },
     },
+}
+
+# django-allauth
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+ACCOUNT_FORMS = {
+    "signup": "jobs.forms.RecruiterRegistrationForm",
+}
+ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
+ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+LOGIN_REDIRECT_URL = "/"
+
+# django-anymail
+EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+
+ANYMAIL = {
+    "MAILJET_API_KEY": os.getenv("MAILJET_API_KEY", None),
+    "MAILJET_SECRET_KEY": os.getenv("MAILJET_SECRET_KEY", None),
 }

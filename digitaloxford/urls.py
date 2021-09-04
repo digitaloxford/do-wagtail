@@ -1,9 +1,8 @@
 from django.conf import settings
-from django.urls import include, path
 from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include, path
 from django.views.generic import TemplateView
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
@@ -15,6 +14,9 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path("accounts/", include("allauth.urls")),
+    path("accounts/", include("users.urls")),
+    # path("jobs/", include("jobs.urls"), name="jobs"),
     # Service worker
     url(
         r"^serviceworker.js",

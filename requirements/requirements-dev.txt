@@ -1,0 +1,10 @@
+-r requirements.txt
+black
+djhtml
+flake8
+isort
+Werkzeug==2.0.1
+pytest
+pytest-django
+coverage
+django-extensions

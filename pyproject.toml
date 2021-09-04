@@ -25,3 +25,10 @@ force-exclude = '''
   | venv
 )/
 '''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+skip="env"
+skip_glob="*/migrations/*"
+filter_files=true

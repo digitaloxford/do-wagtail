@@ -1,0 +1,31 @@
+[run]
+source = .
+omit =
+    ./env/*
+    *tests*
+    *apps.py
+    *manage.py
+    *__init__.py
+    *migrations*
+    *asgi*
+    *wsgi*
+    *admin.py
+    *urls.py
+    test_helpers.py
+    test_settings.py
+
+[report]
+omit =
+    ./env/*
+    *tests*
+    *apps.py
+    *manage.py
+    *__init__.py
+    *migrations*
+    *asgi*
+    *wsgi*
+    *admin.py
+    *urls.py
+
+[html]
+directory = htmlcov/

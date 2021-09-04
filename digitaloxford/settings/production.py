@@ -50,9 +50,3 @@ TEMPLATES = [
 # EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 # EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS = True
-
-try:
-    # Import local settings, excluded by .gitignore
-    from .local import *
-except ImportError:
-    pass
