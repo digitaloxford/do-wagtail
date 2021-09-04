@@ -301,11 +301,3 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 LOGIN_REDIRECT_URL = "/"
-
-# django-anymail
-EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
-
-ANYMAIL = {
-    "MAILJET_API_KEY": os.getenv("MAILJET_API_KEY", None),
-    "MAILJET_SECRET_KEY": os.getenv("MAILJET_SECRET_KEY", None),
-}
