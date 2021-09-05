@@ -223,6 +223,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
     }
 }
 
+PASSWORD_REQUIRED_TEMPLATE = "home/password_required.html"
 WAGTAIL_USER_CREATION_FORM = "users.forms.WagtailUserCreationForm"
 WAGTAIL_USER_EDIT_FORM = "users.forms.WagtailUserEditForm"
 WAGTAIL_USER_CUSTOM_FIELDS = [
