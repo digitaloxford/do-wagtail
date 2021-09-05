@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from dotenv import load_dotenv
 
 # Because this always trips me up:
 # BASE_DIR is where manage.py lives
@@ -19,6 +20,8 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+dotenv_path = os.path.join(PROJECT_DIR, '.env')
+load_dotenv(dotenv_path)
 
 # Set secret key
 SECRET_KEY = os.getenv("SECRET_KEY")
