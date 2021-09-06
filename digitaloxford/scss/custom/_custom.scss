@@ -285,6 +285,15 @@ body.home {
 }
 
 // Forms
+.signup-form {
+    width: 50%;
+    margin: 0 auto 2rem auto;
+
+    & input {
+        width: 100%;
+    }
+}
+
 form label {
     display: block;
     margin-bottom: 5px;
