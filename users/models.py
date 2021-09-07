@@ -7,7 +7,7 @@ from django.urls import reverse
 class User(AbstractUser):
     display_name = models.CharField(
         verbose_name="Display name",
-        max_length=30,
+        max_length=100,
     )
 
     class Meta:
