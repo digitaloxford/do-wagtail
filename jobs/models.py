@@ -1,3 +1,4 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -28,13 +29,30 @@ class JobIndexPage(MetadataPageMixin, Page):
         context = super().get_context(request)
         now = timezone.now()
 
-        jobs = (
+        all_jobs = (
             JobPage.objects.all()
             .specific()
             .live()
             .filter(closing_date__gte=now)
             .order_by("-first_published_at")
         )
+
+        # Paginate all jobs by 20 per page
+        paginator = Paginator(all_jobs, 20)
+        # Try to get the ?page=x value
+        page = request.GET.get("page")
+
+        try:
+            # If the page exists and the ?page=x is an int
+            jobs = paginator.page(page)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            jobs = paginator.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            jobs = paginator.page(paginator.num_pages)
+
         context["jobs"] = jobs
         return context
 
@@ -96,13 +114,30 @@ class RecruiterPage(MetadataPageMixin, Page):
         context = super().get_context(request)
         now = timezone.now()
 
-        jobs = (
+        all_jobs = (
             JobPage.objects.child_of(self)
             .specific()
             .live()
             .filter(closing_date__gte=now)
             .order_by("-first_published_at")
         )
+
+        # Paginate all jobs by 20 per page
+        paginator = Paginator(all_jobs, 20)
+        # Try to get the ?page=x value
+        page = request.GET.get("page")
+
+        try:
+            # If the page exists and the ?page=x is an int
+            jobs = paginator.page(page)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            jobs = paginator.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            jobs = paginator.page(paginator.num_pages)
+
         context["jobs"] = jobs
         return context
 
