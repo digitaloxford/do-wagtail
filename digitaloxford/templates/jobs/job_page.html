@@ -7,9 +7,9 @@
 {% block content %}
     <h1>{{ page.title }}</h1>
     <ul class="job-meta">
-        <li class="job-closing-date"><span>Closing date:</span> {{ page.closing_date|date:"jS F Y"}}</li>
-        <li class="job-type"><span>Job Type:</span> {{ page.get_job_type_display }}</li>
-        <li class="job-salary"><span>Salary / Rate:</span> {{ page.salary}}</li>
+        <li class="job-closing-date">Closing date: <span>{{ page.closing_date|date:"jS F Y"}}</span></li>
+        <li class="job-type">Job Type: <span>{{ page.get_job_type_display }}</span></li>
+        <li class="job-salary">Salary / Rate: <span>{{ page.salary}}</span></li>
     </ul>
 
     <p class="job-poster">Posted by <a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></p>
