@@ -109,7 +109,7 @@ Regards
                 site_name=current_site.name, email=user.email
             )
             USER_EMAIL_FROM = settings.WAGTAILADMIN_NOTIFICATION_FROM_EMAIL
-            USER_EMAIL_TO = [settings.WAGTAILADMIN_NOTIFICATION_FROM_EMAIL]
+            USER_EMAIL_TO = [user.email]
 
             send_mail(
                 USER_EMAIL_SUBJECT,
