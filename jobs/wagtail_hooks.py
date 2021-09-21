@@ -77,6 +77,7 @@ class JobPageModelAdmin(ModelAdmin):
     exclude_from_explorer = False
     list_display = ("title", "short_description", "closing_date")
     search_fields = ("title",)
+    ordering = ["closing_date"]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
