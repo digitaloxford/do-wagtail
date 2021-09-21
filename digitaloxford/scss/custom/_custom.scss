@@ -314,7 +314,7 @@ form button {
     list-style-type: none;
 
     &>li {
-        margin-bottom: ms(3);
+        margin-bottom: ms(4);
 
         & .job-title {
             margin: 0 0 ms(-2) 0;
@@ -335,18 +335,22 @@ form button {
     flex-direction: row;
     gap: 1rem;
 
-    & li {
+    & dt {
+        display: inline-block;
+        margin: 0 0 0 0;
+    }
 
-        & span {
-            display: inline-block;
-            font-weight: bold;
-        }
+    & dd {
+        margin: 0 0 0 0;
+        display: inline-block;
+        font-weight: bold;
     }
 
 }
 
 .job-poster {
-    margin: 0 0 ms(1) 0;
+    font-size: 14px;
+    margin: 0 0 0 0;
 }
 
 .page-job {

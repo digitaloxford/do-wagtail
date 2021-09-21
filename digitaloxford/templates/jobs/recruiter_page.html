@@ -50,11 +50,12 @@
             {% for job in jobs %}
                 <li>
                     <h3 class="job-title"><a href="{% pageurl job %}">{{job.title}}</a></h3>
-                    <ul class="job-meta">
-                        <li class="job-closing-date">Closing date: <span>{{ job.closing_date|date:"jS F Y"}}</span></li>
-                        <li class="job-type">Job Type: <span>{{ job.get_job_type_display }}</span></li>
-                        <li class="job-salary">Salary / Rate: <span>{{ job.salary}}</span></li>
-                    </ul>
+                    <dl class="job-meta">
+                        <div class="job-closing-date"><dt>Closing date:</dt> <dd>{{ job.closing_date|date:"jS F Y"}}</dd></div>
+                        <div class="job-type"><dt>Job Type:</dt> <dd>{{ job.get_job_type_display }}</dd></div>
+                        <div class="job-salary"><dt>Salary / Rate:</dt> <dd>{{ job.salary}}</dd></div>
+                        <div class="job-poster"><dt>Posted by</dt> <dd><a href="{{ job.get_parent.url }}">{{ job.get_parent.title }}</a></dd></div>
+                    </dl>
                     <p class="job-short-description">{{ job.short_description }}</p>
                 </li>
             {% endfor %}
