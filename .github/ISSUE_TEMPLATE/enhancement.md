@@ -1,6 +1,6 @@
 ---
 name: Enhancement
-about: Something we can improve
+about: Is there something we can improve?
 title: ''
 labels: ''
 assignees: ''
