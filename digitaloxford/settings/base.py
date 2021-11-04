@@ -227,6 +227,12 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
     }
 }
 
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
 PASSWORD_REQUIRED_TEMPLATE = "home/password_required.html"
 WAGTAIL_USER_CREATION_FORM = "users.forms.WagtailUserCreationForm"
 WAGTAIL_USER_EDIT_FORM = "users.forms.WagtailUserEditForm"
