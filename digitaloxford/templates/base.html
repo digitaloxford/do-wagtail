@@ -1,28 +1,13 @@
-{% load static wagtailuserbar sass_tags menu_tags wagtailmetadata_tags i18n %}
+{% load static wagtailuserbar sass_tags menu_tags i18n %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
     <head>
         <meta charset="utf-8" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A technology, design, and creative community for Oxfordshire">
-        {% block meta %}
-            {# Custom meta tags #}
-        {% endblock %}
-        {% if request and self %}
-            {% meta_tags %}
-        {% endif %}
+
+        <!-- Metadata -->
+        {% include "wagtailseo/meta.html" %}
 
         <!-- Icon and Manifest -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
@@ -84,6 +69,11 @@
 
             <p class="copyright">&copy; Digital Oxford</p>
         </footer>
+
+        {% include "wagtailseo/struct_data.html" %}
+
+        {% block extra_struct_data %}
+        {% endblock %}
 
         {# Global javascript #}
         <!-- <script type="text/javascript" src="{% static 'js/digitaloxford.js' %}"></script> -->

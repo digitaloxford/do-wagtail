@@ -29,3 +29,9 @@
     </ul>
 
 {% endblock %}
+
+{% block extra_struct_data %}
+    <script type="application/ld+json">
+        {{ self.my_struct_job_json|safe }}
+    </script>
+{% endblock %}

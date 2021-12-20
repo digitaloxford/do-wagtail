@@ -10,3 +10,4 @@ python-dotenv==0.19.0
 wagtail-metadata==3.4.0
 wagtail>=2.14,<2.16
 wagtailmenus>=3.0
+wagtail-seo==1.0.*

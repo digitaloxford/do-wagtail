@@ -1,3 +1,5 @@
+import json
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
@@ -7,12 +9,13 @@ from taggit.models import TaggedItemBase
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
-from wagtailmetadata.models import MetadataPageMixin
+from wagtailseo.models import SeoMixin
+from wagtailseo.utils import StructDataEncoder, get_struct_data_images
 
 from users.models import User
 
 
-class JobIndexPage(MetadataPageMixin, Page):
+class JobIndexPage(SeoMixin, Page):
     parent_page_types = ["home.HomePage"]
     subpage_types = ["RecruiterPage"]
     max_count = 1
@@ -22,6 +25,8 @@ class JobIndexPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("intro", classname="intro"),
     ]
+
+    promote_panels = SeoMixin.seo_panels
 
     def get_context(self, request):
         # Update context to include only published jobs, ordered
@@ -57,7 +62,7 @@ class JobIndexPage(MetadataPageMixin, Page):
         return context
 
 
-class RecruiterPage(MetadataPageMixin, Page):
+class RecruiterPage(SeoMixin, Page):
     parent_page_types = ["JobIndexPage"]
     subpage_types = ["JobPage"]
 
@@ -109,6 +114,8 @@ class RecruiterPage(MetadataPageMixin, Page):
         ),
     ]
 
+    promote_panels = SeoMixin.seo_panels
+
     def get_context(self, request):
         # Update context to include jobs by this recruiter
         context = super().get_context(request)
@@ -151,7 +158,7 @@ class JobTag(TaggedItemBase):
     )
 
 
-class JobPage(MetadataPageMixin, Page):
+class JobPage(SeoMixin, Page):
     parent_page_types = ["RecruiterPage"]
     subpage_types = []
 
@@ -194,6 +201,39 @@ class JobPage(MetadataPageMixin, Page):
         FieldPanel("job_link", heading="Link to apply for this position"),
         FieldPanel("email", heading="Email address for more information"),
     ]
+
+    promote_panels = SeoMixin.seo_panels
+
+    # Wagtail SEO fallback sources
+    seo_pagetitle_sources = [
+        "title",
+    ]
+
+    seo_description_sources = [
+        "search_description",
+        "short_description",
+    ]
+
+    @property
+    def my_struct_job_dict(self) -> dict:
+        sd_dict = {
+            "@context": "https://schema.org/",
+            "@type": "JobPosting",
+            "title": self.title,
+            "description": self.short_description,
+            "datePosted": self.seo_published_at,
+            "baseSalary": self.salary,
+            "salaryCurrency": "GBP",
+            "employmentType": self.job_type,
+            "applicationContact": self.email,
+            "directApply": self.job_link,
+        }
+
+        return sd_dict
+
+    @property
+    def my_struct_job_json(self) -> str:
+        return json.dumps(self.my_struct_job_dict, cls=StructDataEncoder)
 
     class Meta:
         ordering = ["title"]

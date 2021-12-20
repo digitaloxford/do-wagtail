@@ -5,17 +5,12 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
-from wagtailmetadata.models import MetadataPageMixin
+from wagtailseo.models import SeoMixin
 
 from jobs.models import JobIndexPage
 
 
-@register_setting
-class SocialMediaSettings(BaseSetting):
-    twitter = models.CharField(max_length=100, help_text="Twitter Username", blank=True)
-
-
-class BasicPage(MetadataPageMixin, Page):
+class BasicPage(SeoMixin, Page):
     parent_page_types = ["HomePage"]
     subpage_types = []
 
@@ -25,8 +20,10 @@ class BasicPage(MetadataPageMixin, Page):
         FieldPanel("body", classname="full"),
     ]
 
+    promote_panels = SeoMixin.seo_panels
 
-class HomePage(MetadataPageMixin, Page):
+
+class HomePage(SeoMixin, Page):
     subpage_types = ["BasicPage", "jobs.JobIndexPage"]
 
     banner_image = models.ForeignKey(
@@ -44,3 +41,5 @@ class HomePage(MetadataPageMixin, Page):
         FieldPanel("intro", classname="intro"),
         FieldPanel("body", classname="full"),
     ]
+
+    promote_panels = SeoMixin.seo_panels
