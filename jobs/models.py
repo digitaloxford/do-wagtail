@@ -226,7 +226,7 @@ class JobPage(SeoMixin, Page):
             "salaryCurrency": "GBP",
             "employmentType": self.job_type,
             "applicationContact": self.email,
-            "directApply": self.job_link,
+            "url": self.job_link,
         }
 
         return sd_dict
