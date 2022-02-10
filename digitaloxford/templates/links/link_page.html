@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+    {% image page.link_image fill-800x800 as tmp_image %}
+    <img src="{{ tmp_image.url }}" alt="{{ teammember.title }}" />
+    {{ page.url }}
+    {{ page.description }}
+    {{ page.testimonial }}
+{% endblock %}

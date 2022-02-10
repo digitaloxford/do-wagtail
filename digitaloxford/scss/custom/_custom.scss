@@ -1,9 +1,9 @@
 html {
-    // Reset box model to something sensible
-    // https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+    /*
+    Reset box model to something sensible
+    https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+    */
     box-sizing: border-box;
-    // html is set to 62.5% so that all the measurements are based on 10px sizing. 1.5rem = 15px
-    // font-size: 62.5%;
 }
 
 *,
@@ -52,14 +52,83 @@ h6 {
     color: $green;
 }
 
+
+p {
+    margin: 0 0 20px 0;
+}
+
+figure {
+    margin: 0 0 0 0;
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+time {
+    display: block;
+}
+
 table {
     width: 100%;
+
+    & thead {
+        text-align: left;
+    }
+
+    & tr {
+        & th[scope=col] {
+            text-align: left;
+        }
+
+        & th[scope=row] {
+            text-align: right;
+        }
+
+        & th,
+        & td {
+            padding: 5px 10px 5px 10px;
+        }
+    }
 }
 
-thead {
-    text-align: left;
+/* Utilities */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
 }
 
+.list-reset {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    list-style-type: none;
+}
+
+.block {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.responsive-object {
+    position: relative;
+
+    & iframe,
+    & object,
+    & embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
 
 /* Sitewide link defaults */
 
@@ -167,7 +236,6 @@ ul.navigation {
     }
 }
 
-
 .strapline {
     text-align: center;
     font-size: ms(1);
@@ -197,7 +265,7 @@ body.home {
     grid-column: full;
 }
 
-// Messages
+/* Messages */
 .messages {
     padding: 0 0 0 0;
     display: flex;
@@ -229,7 +297,7 @@ body.home {
     }
 }
 
-// General
+/* General */
 .figure-image.width-full {
     margin-bottom: 20px;
 }
@@ -284,7 +352,7 @@ body.home {
     color: $green;
 }
 
-// Forms
+/* Forms */
 .signup-form {
     width: 50%;
     margin: 0 auto 2rem auto;
@@ -308,7 +376,7 @@ form button {
     padding: 1px 15px;
 }
 
-// Jobs
+/* Jobs */
 .jobs-list {
     padding: 0 0 0 0;
     list-style-type: none;
@@ -345,7 +413,6 @@ form button {
         display: inline-block;
         font-weight: bold;
     }
-
 }
 
 .job-poster {
@@ -367,7 +434,62 @@ form button {
     }
 }
 
-// Pagination
+/* Links */
+.filters {
+    margin: 0 0 ms(2) 0;
+    border-bottom: 1px solid $light-grey;
+}
+
+ul.filter-list {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    & li {
+        & a {
+            display: inline-block;
+            padding: 2px 5px 2px 5px;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &.active {
+            & a {
+                background-color: $light-grey;
+            }
+        }
+    }
+}
+
+ul.links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ms(2);
+
+    & .link {
+        display: flex;
+        flex-direction: column;
+
+        & a {
+            display: block;
+            text-decoration: none;
+
+            & h2 {
+                font-size: ms(1);
+            }
+
+            &:hover h2 {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* Pagination */
 .pagination-count {
     text-align: center;
     margin-bottom: 0;
@@ -390,7 +512,7 @@ form button {
     }
 }
 
-// Footer
+/* Footer */
 .vcard .name,
 .vcard,
 .contact {
@@ -445,5 +567,10 @@ footer {
 
     .figure-image.width-full {
         margin-bottom: 40px;
+    }
+
+    /* Links */
+    ul.links {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }

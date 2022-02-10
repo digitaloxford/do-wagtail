@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "jobs",
     "search",
     "users",
+    "links",
     "wagtailseo",
     "wagtail.contrib.modeladmin",
     "wagtail.contrib.settings",
