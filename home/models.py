@@ -59,6 +59,7 @@ class ModelCategory(models.Model):
         return self.name
 
     class Meta:
+        ordering = ["name"]
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
