@@ -479,20 +479,25 @@ ul.filter-list {
 }
 
 ul.links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: ms(2);
 
     & .link {
-        display: flex;
-        flex-direction: column;
-
         & a {
-            display: block;
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            column-gap: ms(2);
             text-decoration: none;
 
+            & figure {
+                flex: 0 0 100px;
+            }
+
             & h2 {
-                font-size: ms(1);
+                margin-top: 0;
+                font-size: ms(0);
             }
 
             &:hover h2 {
@@ -583,7 +588,17 @@ footer {
     }
 
     /* Links */
-    ul.links {
-        grid-template-columns: 1fr 1fr 1fr;
+ul.links {
+
+
+        & .link {
+            & a {
+
+                & figure {
+                    flex: 0 0 150px;
+                }
+            }
+        }
     }
+
 }

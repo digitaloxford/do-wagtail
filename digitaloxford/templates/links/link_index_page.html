@@ -23,17 +23,26 @@
             {% for link in links %}
                 <li class="link">
                     <a href="{{ link.link }}">
-                        {% if link.link_image %}
-                            {% image link.link_image height-400 as tmp_image %}
-                            <img src="{{ tmp_image.url }}" alt="{{ teammember.title }}" />
-                        {% endif %}
-                        <h2>{{ link.title }}</h2>
-                        {% if link.description %}
-                            <p class="description">{{ link.description }}</p>
-                        {% endif %}
-                        {% if link.testimonial %}
-                            <blockquote>{{ link.testimonial }}</blockquote>
-                        {% endif %}
+
+                        <figure>
+                            {% image link.link_image width-400 as tmp_image %}
+                            <img src="{{ tmp_image.url|default:'/static/img/no-logo.png' }}" alt="{{ link.title }} Logo" />
+                        </figure>
+                        <div class="details">
+                            <h2>{{ link.title }}</h2>
+
+                            {% if link.description %}
+
+                                <p class="description">{{ link.description }}</p>
+
+                            {% endif %}
+
+                            {% if link.testimonial %}
+
+                                <blockquote>{{ link.testimonial }}</blockquote>
+
+                            {% endif %}
+                        </div>
                     </a>
                 </li>
 
