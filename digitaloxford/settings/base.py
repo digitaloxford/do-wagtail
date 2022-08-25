@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "anymail",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "digitaloxford.urls"
