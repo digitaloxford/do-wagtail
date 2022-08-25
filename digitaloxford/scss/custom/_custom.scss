@@ -377,6 +377,19 @@ form button {
 }
 
 /* Jobs */
+body.jobs {
+    & .intro {
+       padding: ms(0) ms(0) ms(0) ms(0);
+       margin-bottom: ms(1);
+       border: 1px solid $light-grey;
+       background-color: $lighter-grey;
+
+       & p:last-child {
+           margin-bottom: 0;
+       }
+    }
+}
+
 .jobs-list {
     padding: 0 0 0 0;
     list-style-type: none;

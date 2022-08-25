@@ -7,8 +7,9 @@
 {% block content %}
 
     <h1>{{ page.title }}</h1>
-
-    {{ page.intro|richtext }}
+    <div class="intro">
+        {{ page.intro|richtext }}
+    </div>
 
     {% if jobs.object_list.count %}
         <ul class="jobs-list">
