@@ -3,7 +3,7 @@ black
 djhtml
 flake8
 isort
-Werkzeug==2.0.1
+Werkzeug
 pytest
 pytest-django
 coverage

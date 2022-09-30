@@ -5,13 +5,11 @@ from django.shortcuts import redirect
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 from wagtail.search import index
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtailseo.models import SeoMixin
 
 from home.models import ModelCategory
@@ -105,7 +103,7 @@ class LinkPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel("link_image", help_text="I dunno, a logo maybe?"),
+        FieldPanel("link_image", help_text="I dunno, a logo maybe?"),
         FieldPanel("link", classname="full"),
         FieldPanel("description", classname="full"),
         FieldPanel("testimonial", classname="full"),
@@ -142,7 +140,7 @@ class LinkPageCategory(models.Model):
     )
 
     panels = [
-        SnippetChooserPanel("link_category"),
+        FieldPanel("link_category"),
     ]
 
     class Meta:

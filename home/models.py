@@ -1,11 +1,10 @@
 from django.db import models
 from taggit.models import Tag as TaggitTag
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.fields import RichTextField
 from wagtail.images.models import Image
+from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtailseo.models import SeoMixin
 
@@ -37,7 +36,7 @@ class HomePage(SeoMixin, Page):
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel("banner_image"),
+        FieldPanel("banner_image"),
         FieldPanel("intro", classname="intro"),
         FieldPanel("body", classname="full"),
     ]

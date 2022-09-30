@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
-    "wagtail.core",
+    "wagtail",
     "modelcluster",
     "taggit",
     "sass_processor",
@@ -207,6 +207,7 @@ WAGTAIL_SITE_NAME = "digitaloxford"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "https://digitaloxford.com"
+WAGTAILADMIN_BASE_URL = "https://digitaloxford.com"
 
 # Custom settings
 DATE_FORMAT = "jS F Y"

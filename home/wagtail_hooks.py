@@ -1,9 +1,9 @@
+from wagtail import hooks
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin,
     ModelAdminGroup,
     modeladmin_register,
 )
-from wagtail.core import hooks
 from wagtail.snippets.wagtail_hooks import SnippetsMenuItem
 
 from .models import ModelCategory, ModelTag

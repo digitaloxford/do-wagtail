@@ -5,7 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from wagtail.core.models import Group, GroupPagePermission
+from wagtail.models import Group, GroupPagePermission
 from wagtail.users.models import UserProfile
 
 from users.models import User

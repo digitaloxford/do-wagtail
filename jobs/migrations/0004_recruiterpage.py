@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.fields
+import wagtail.fields
 import wagtailmetadata.models
 
 
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='RecruiterPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('description', wagtail.core.fields.RichTextField(blank=True)),
+                ('description', wagtail.fields.RichTextField(blank=True)),
                 ('email', models.EmailField(max_length=254)),
                 ('phone', models.CharField(max_length=50)),
                 ('address_address1', models.CharField(max_length=200)),

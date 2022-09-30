@@ -1,4 +1,4 @@
-from wagtail.tests.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTests
 
 from jobs.models import JobIndexPage, JobPage
 from links.models import LinkIndexPage, LinkPage

@@ -24,10 +24,6 @@
                 <li class="link">
                     <a href="{{ link.link }}">
 
-                        <figure>
-                            {% image link.link_image width-400 as tmp_image %}
-                            <img src="{{ tmp_image.url|default:'/static/img/no-logo.png' }}" alt="{{ link.title }} Logo" />
-                        </figure>
                         <div class="details">
                             <h2>{{ link.title }}</h2>
 

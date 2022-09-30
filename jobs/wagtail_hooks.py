@@ -1,6 +1,6 @@
+from wagtail import hooks
 from wagtail.admin.menu import MenuItem
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
-from wagtail.core import hooks
 
 from .models import JobPage, RecruiterPage
 
