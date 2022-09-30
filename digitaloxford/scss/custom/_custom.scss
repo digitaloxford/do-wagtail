@@ -273,7 +273,7 @@ body.home {
     list-style-type: none;
 
     & li {
-        padding: .2rem 1rem;
+        padding: .5rem 1rem;
 
         &.info {
             color: $messages-info-color;
@@ -296,6 +296,8 @@ body.home {
         }
     }
 }
+
+
 
 /* General */
 .figure-image.width-full {
@@ -374,6 +376,18 @@ form .helptext {
 
 form button {
     padding: 1px 15px;
+}
+
+.errorlist {
+    display: flex;
+    flex-direction: column;
+    color: $messages-error-color;
+    background-color: $messages-error-bg;
+
+    & li {
+        padding: .5rem 1rem;
+
+    }
 }
 
 /* Jobs */
