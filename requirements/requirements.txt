@@ -2,7 +2,7 @@ wheel
 django-anymail==8.6
 django-allauth==0.51.*
 django-compressor==4.1
-django-sass-processor==1.0
+django-sass-processor==1.2.1
 django-htmx==1.9.*
 Django>=3.2,<3.3
 libsass==0.21.*
