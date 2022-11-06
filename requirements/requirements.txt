@@ -10,4 +10,4 @@ psycopg2==2.9.3
 python-dotenv==0.21.0
 wagtail>=3.0,<4.0
 wagtailmenus>=3.1
-wagtail-seo==2.2.*
+wagtail-seo==2.3.*

@@ -1,8 +1,10 @@
 import json
 
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.utils import timezone
+from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
@@ -26,7 +28,7 @@ class JobIndexPage(SeoMixin, Page):
         FieldPanel("intro", classname="intro"),
     ]
 
-    promote_panels = SeoMixin.seo_panels
+    promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
     def get_context(self, request):
         # Update context to include only published jobs, ordered
@@ -60,6 +62,18 @@ class JobIndexPage(SeoMixin, Page):
 
         context["jobs"] = jobs
         return context
+
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
 
 
 class RecruiterPage(SeoMixin, Page):
@@ -114,7 +128,7 @@ class RecruiterPage(SeoMixin, Page):
         ),
     ]
 
-    promote_panels = SeoMixin.seo_panels
+    promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
     def get_context(self, request):
         # Update context to include jobs by this recruiter
@@ -147,6 +161,18 @@ class RecruiterPage(SeoMixin, Page):
 
         context["jobs"] = jobs
         return context
+
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
 
     class Meta:
         ordering = ["title"]
@@ -202,7 +228,7 @@ class JobPage(SeoMixin, Page):
         FieldPanel("email", heading="Email address for more information"),
     ]
 
-    promote_panels = SeoMixin.seo_panels
+    promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
     # Wagtail SEO fallback sources
     seo_pagetitle_sources = [
@@ -213,6 +239,18 @@ class JobPage(SeoMixin, Page):
         "search_description",
         "short_description",
     ]
+
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
 
     @property
     def my_struct_job_dict(self) -> dict:

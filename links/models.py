@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models import Count
 from django.shortcuts import redirect
+from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
@@ -81,6 +83,18 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         self.links = self.get_links().filter(categories__link_category__slug=category)
 
         return self.render(request)
+
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
 
 
 class LinkPage(Page):

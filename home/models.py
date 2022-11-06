@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+from django.utils.functional import cached_property
 from taggit.models import Tag as TaggitTag
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
@@ -21,6 +23,18 @@ class BasicPage(SeoMixin, Page):
 
     promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
+
 
 class HomePage(SeoMixin, Page):
     subpage_types = ["BasicPage", "jobs.JobIndexPage", "links.LinkIndexPage"]
@@ -42,6 +56,18 @@ class HomePage(SeoMixin, Page):
     ]
 
     promote_panels = SeoMixin.seo_panels
+
+    @cached_property
+    def seo_image_url(self):
+        if self.og_image:
+            image_url = self.og_image.get_rendition("width-1200").url
+            return settings.BASE_URL + image_url
+
+        return ""
+
+    @cached_property
+    def seo_canonical_url(self):
+        return settings.BASE_URL + self.url
 
 
 @register_snippet
