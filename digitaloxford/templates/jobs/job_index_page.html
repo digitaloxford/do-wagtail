@@ -12,7 +12,7 @@
     </div>
 
     {% if jobs.object_list.count %}
-        <ul class="jobs-list">
+        <ul class="jobs-list list-reset">
             {% for job in jobs %}
                 <li>
                     <h2 class="job-title"><a href="{% pageurl job %}">{{job.title}}</a></h2>

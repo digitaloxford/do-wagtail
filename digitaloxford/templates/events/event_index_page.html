@@ -18,29 +18,54 @@
         </ul>
     </div>
 
-    {% if page.get_children.count > 0 %}
-        <ul class="events list-reset">
+    {% if events.object_list.count %}
+        <ul class="events-list list-reset">
             {% for event in events %}
                 <li class="event">
-                    <a href="{{ event.url }}">
+                    <h2 class="event-title"><a href="{{ event.url }}">{{ event.title }}</a></h2>
+                    <p>{{ event.start }}</p>
 
-                        <div class="details">
-                            <h2>{{ event.title }}</h2>
+                    {% if event.description %}
 
-                            <p>{{ event.start }}</p>
+                        <div class="description">{{ event.description|richtext }}</div>
 
-                            {% if event.description %}
-
-                                <p class="description">{{ event.description|richtext }}</p>
-
-                            {% endif %}
-
-                        </div>
-                    </a>
+                    {% endif %}
                 </li>
 
             {% endfor %}
         </ul>
+
+        {% if events.paginator.num_pages > 1 %}
+
+            <p class="pagination-count">Page {{ events.number }} of {{ events.paginator.num_pages }}</p>
+
+            <ul class="pagination">
+                {% if events.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ events.previous_page_number }}" class="page-link">
+                            <span>&laquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for page_num in events.paginator.page_range %}
+                    <li class="page-item {% if page_num == events.number %} active{% endif %}">
+                        <a href="?page={{ page_num }}" class="page-link">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if events.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ events.next_page_number }}" class="page-link">
+                            <span>&raquo;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+        {% endif %}
     {% else %}
         <p>Hmm, there aren't any events scheduled.</p>
     {% endif %}
