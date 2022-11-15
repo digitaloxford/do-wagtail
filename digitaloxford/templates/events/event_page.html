@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    <p>Event details: <a href="{{page.link}}">{{ page.link }}</a></p>
+    <p>Start: {{ page.start }}</p>
+    <p>End: {{ page.end }}</p>
+    <div>{{ page.description|richtext }}</div>
+{% endblock %}

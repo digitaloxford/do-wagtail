@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+    <div class="filters">
+        <h2>Filters</h2>
+        <ul class="filter-list list-reset">
+            <li class="filter"><a href="{% pageurl page %}">All</a></li>
+            {% for category in categories %}
+                <li class="filter{% if page.filter_slug == category.slug %} active{% endif %}"><a href="{% pageurl page %}category/{{ category.slug }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if page.get_children.count > 0 %}
+        <ul class="events list-reset">
+            {% for event in events %}
+                <li class="event">
+                    <a href="{{ event.url }}">
+
+                        <div class="details">
+                            <h2>{{ event.title }}</h2>
+
+                            <p>{{ event.start }}</p>
+
+                            {% if event.description %}
+
+                                <p class="description">{{ event.description|richtext }}</p>
+
+                            {% endif %}
+
+                        </div>
+                    </a>
+                </li>
+
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Hmm, there aren't any events scheduled.</p>
+    {% endif %}
+{% endblock %}

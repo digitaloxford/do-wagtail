@@ -24,7 +24,7 @@ from home.models import ModelCategory
 class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
     # Set parent_page_types to an empty list to prevent it from
     # being created in the editor interface.
-    # parent_page_types = []
+    parent_page_types = ["home.HomePage"]
     subpage_types = ["EventPage"]
     max_count = 1
 
@@ -50,7 +50,7 @@ class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
             EventPage.objects.all()
             .specific()
             .live()
-            .filter(event_start__gte=now)
+            .filter(start__gte=now)
             .order_by("-first_published_at")
         )
 
@@ -119,18 +119,22 @@ class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
         return settings.BASE_URL + self.url
 
 
-class EventPage(Page):
+class EventPage(SeoMixin, Page):
     parent_page_types = ["EventIndexPage"]
+    subpage_types = []
 
-    event_link = models.URLField()
+    link = models.URLField()
 
-    description = models.CharField(max_length=1000)
+    description = RichTextField(
+        verbose_name="Long description",
+        features=["h2", "h3", "bold", "italic", "ol", "ul"],
+    )
 
-    event_start = models.DateTimeField("Starts", blank=False)
+    start = models.DateTimeField("Starts", blank=False)
 
-    event_end = models.DateTimeField("End", blank=True, null=True)
+    end = models.DateTimeField("End", blank=True, null=True)
 
-    ticket_link = models.URLField(blank=True, null=True)
+    location = models.CharField(max_length=1000, blank=True, null=True)
 
     tags = ClusterTaggableManager(through="events.EventPageTag", blank=True)
 
@@ -144,9 +148,16 @@ class EventPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("event_image", help_text="I dunno, a logo maybe?"),
-        FieldPanel("event", classname="full"),
         FieldPanel("description", classname="full"),
-        FieldPanel("testimonial", classname="full"),
+        MultiFieldPanel(
+            [
+                FieldPanel("location"),
+                FieldPanel("link"),
+                FieldPanel("start"),
+                FieldPanel("end"),
+            ],
+            heading="Event details",
+        ),
         MultiFieldPanel(
             [
                 InlinePanel(
@@ -158,6 +169,8 @@ class EventPage(Page):
             heading="Metadata",
         ),
     ]
+
+    promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
     search_fields = Page.search_fields + [  # Inherit search_fields from Page
         index.SearchField("description"),
