@@ -6,7 +6,7 @@
 
 {% block content %}
     {% image page.link_image fill-800x800 as tmp_image %}
-    <img src="{{ tmp_image.url }}" alt="{{ teammember.title }}" />
+    <img src="{{ tmp_image.url }}" alt="{{ page.title }}" />
     {{ page.url }}
     {{ page.description }}
     {{ page.testimonial }}
