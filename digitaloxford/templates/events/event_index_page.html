@@ -10,16 +10,18 @@
     <div class="intro">{{ page.intro|richtext }}</div>
     <div class="filters">
         <h2>Filters</h2>
-        <ul class="filter-list list-reset">
-            <li class="filter"><a href="{% pageurl page %}">All</a></li>
+        <ul class="filter-list list-reset" data-hx-target="#events" data-hx-swap="outerHTML" data-hx-push-url="true">
+            <li class="filter"><a href="{% pageurl page %}" data-hx-get="{% pageurl page %}" data-script="on click remove .active from <li.filter/>">All</a></li>
             {% for category in categories %}
-                <li class="filter{% if page.filter_slug == category.slug %} active{% endif %}"><a href="{% pageurl page %}category/{{ category.slug }}">{{ category.name }}</a></li>
+                <li class="filter{% if page.filter_slug == category.slug %} active{% endif %}">
+                    <a href="{% pageurl page %}category/{{ category.slug }}" data-hx-get="{% pageurl page %}category/{{ category.slug }}" data-script="on click remove .active from <li.filter/> then add .active to closest <li/>">{{ category.name }}</a>
+                </li>
             {% endfor %}
         </ul>
     </div>
 
     {% if events.object_list.count %}
-        <ul class="events-list list-reset">
+        <ul class="events-list list-reset" id="events">
             {% for event in events %}
                 <li class="event">
                     <h2 class="event-title"><a href="{{ event.url }}">{{ event.title }}</a></h2>
@@ -31,7 +33,6 @@
 
                     {% endif %}
                 </li>
-
             {% endfor %}
         </ul>
 

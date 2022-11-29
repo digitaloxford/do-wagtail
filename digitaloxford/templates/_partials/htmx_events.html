@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<ul class="events-list list-reset" id="events">
+    {% for event in events %}
+        <li class="event">
+            <h2 class="event-title"><a href="{{ event.url }}">{{ event.title }}</a></h2>
+            <p>{{ event.start }}</p>
+
+            {% if event.description %}
+
+                <div class="description">{{ event.description|richtext }}</div>
+
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

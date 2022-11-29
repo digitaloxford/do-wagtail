@@ -40,22 +40,18 @@ class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
 
     promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
+    def get_template(self, request):
+        if request.htmx:
+            return "_partials/htmx_events.html"
+
+        return "events/event_index_page.html"
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["events_page"] = self
 
-        now = timezone.now()
-
-        all_events = (
-            EventPage.objects.all()
-            .specific()
-            .live()
-            .filter(start__gte=now)
-            .order_by("-first_published_at")
-        )
-
         # Paginate all events by 20 per page
-        paginator = Paginator(all_events, 20)
+        paginator = Paginator(self.events, 20)
         # Try to get the ?page=x value
         page = request.GET.get("page")
 
@@ -84,7 +80,14 @@ class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
         return context
 
     def get_events(self):
-        return EventPage.objects.descendant_of(self).live().order_by("title")
+        now = timezone.now()
+
+        return (
+            EventPage.objects.descendant_of(self)
+            .live()
+            .filter(start__gte=now)
+            .order_by("-first_published_at")
+        )
 
     @route(r"^$")
     def event_list(self, request, *args, **kwargs):

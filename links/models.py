@@ -36,19 +36,31 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
 
     promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
+    def get_template(self, request):
+        if request.htmx:
+            return "_partials/htmx_links.html"
+
+        return "links/link_index_page.html"
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context["links_page"] = self
 
-        # https://docs.djangoproject.com/en/3.1/topics/pagination/#using-paginator-in-a-view-function
-        paginator = Paginator(self.links, 10)
+        # Paginate all links by 20 per page
+        paginator = Paginator(self.links, 20)
+        # Try to get the ?page=x value
         page = request.GET.get("page")
+
         try:
+            # If the page exists and the ?page=x is an int
             links = paginator.page(page)
         except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
             links = paginator.page(1)
         except EmptyPage:
-            links = paginator.object_list.none()
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            links = paginator.page(paginator.num_pages)
 
         context["links"] = links
 
