@@ -3,6 +3,7 @@ black
 djhtml
 flake8
 isort
+ipython
 Werkzeug
 pytest
 pytest-django
