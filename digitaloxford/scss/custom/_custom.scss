@@ -558,6 +558,23 @@ footer {
     padding: 20px 20px 10px 20px;
     border-top: 1px solid $green;
     background-color: $yellow-lighter;
+
+    & .social {
+       & a {
+           display: block;
+           padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+           font-size: ms(0);
+           text-decoration: none;
+
+           &:hover {
+               text-decoration: underline;
+           }
+       }
+
+       &.active a {
+           text-decoration: underline;
+       }
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -602,15 +619,21 @@ footer {
     }
 
     /* Links */
-ul.links {
-
-
+    ul.links {
         & .link {
             & a {
 
                 & figure {
                     flex: 0 0 150px;
                 }
+            }
+        }
+    }
+
+    footer {
+        & .social {
+            & a {
+                font-size: ms(1);
             }
         }
     }
