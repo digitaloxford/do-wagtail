@@ -466,7 +466,7 @@ ul.filter-list {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    justify-content: space-between;
+    column-gap: ms(-1);
 
     & li {
         & a {
