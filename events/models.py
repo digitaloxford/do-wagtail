@@ -1,11 +1,8 @@
-import datetime
-
-import pytz
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
 from django.db.models import Count
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -25,7 +22,7 @@ class EventIndexPage(RoutablePageMixin, SeoMixin, Page):
     # Set parent_page_types to an empty list to prevent it from
     # being created in the editor interface.
     parent_page_types = ["home.HomePage"]
-    subpage_types = ["EventPage"]
+    subpage_types = ["EventPage", "EventSuggestionPage"]
     max_count = 1
 
     intro = RichTextField(blank=True)
@@ -126,12 +123,12 @@ class EventPage(SeoMixin, Page):
     parent_page_types = ["EventIndexPage"]
     subpage_types = []
 
-    link = models.URLField()
-
     description = RichTextField(
         verbose_name="Long description",
         features=["h2", "h3", "bold", "italic", "ol", "ul"],
     )
+
+    link = models.URLField()
 
     start = models.DateTimeField("Starts", blank=False)
 
@@ -185,6 +182,55 @@ class EventPage(SeoMixin, Page):
         ordering = ["title"]
         verbose_name = "Event"
         verbose_name_plural = "Events"
+
+
+class EventSuggestionPage(SeoMixin, Page):
+    parent_page_types = ["EventIndexPage"]
+    subpage_types = []
+    max_count = 1
+
+    intro = RichTextField(blank=True)
+
+    thankyou_page_title = models.CharField(
+        max_length=255, help_text="Title text to use for the 'thank you' page"
+    )
+
+    # Note that there's nothing here for specifying the actual form fields -
+    # those are still defined in forms.py. There's no benefit to making these
+    # editable within the Wagtail admin, since you'd need to make changes to
+    # the code to make them work anyway.
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro", classname="full"),
+        FieldPanel("thankyou_page_title"),
+    ]
+
+    def serve(self, request):
+        from .forms import EventSubmissionForm
+
+        if request.method == "POST":
+            form = EventSubmissionForm(request.POST)
+            if form.is_valid():
+                event = form.save()
+                return render(
+                    request,
+                    "events/event_thankyou.html",
+                    {
+                        "page": self,
+                        "event": event,
+                    },
+                )
+        else:
+            form = EventSubmissionForm()
+
+        return render(
+            request,
+            "events/event_suggestion.html",
+            {
+                "page": self,
+                "form": form,
+            },
+        )
 
 
 class EventPageCategory(models.Model):

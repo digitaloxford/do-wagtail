@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body_class %}{{ page.title|slugify }}{% endblock %}
+
+{% block content %}
+    <h1>{{ page.thankyou_page_title }}</h1>
+
+    <p>
+        Thanks! We'll review your suggestion, and if everything is good, we'll get it up on the site soon.
+    </p>
+{% endblock %}
