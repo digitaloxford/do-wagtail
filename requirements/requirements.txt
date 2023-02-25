@@ -5,7 +5,7 @@ django-compressor==4.1
 django-sass-processor==1.2.1
 django-htmx==1.9.*
 django-render-block==0.*
-Django>=3.2,<3.3
+Django~=3.2
 libsass==0.21.*
 psycopg2==2.9.3
 python-dotenv==0.21.0
