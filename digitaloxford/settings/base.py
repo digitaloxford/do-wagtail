@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "anymail",
     "django_htmx",
-    "crispy_forms",
 ]
 
 MIDDLEWARE = [

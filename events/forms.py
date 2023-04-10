@@ -1,46 +1,28 @@
 from datetime import datetime
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
-from django.forms import DateTimeField, ModelForm, Textarea, URLField, ValidationError
+from django.forms import (
+    DateTimeField,
+    DateTimeInput,
+    ModelForm,
+    Textarea,
+    URLInput,
+    ValidationError,
+)
 from django.urls import reverse_lazy
 
 from .models import EventPage
 
 
 class EventSubmissionForm(ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.helper = FormHelper(self)
-    #     # self.helper.form_action = reverse_lazy('index')
-    #     # self.helper.form_method = 'POST'
-    #     self.helper.form_id = "event-submission-form"
-    #     self.helper.attrs = {
-    #         "hx-post": reverse_lazy("index"),
-    #         "hx-target": "#event-submission-form",
-    #         "hx-swap": "outerHTML",
-    #     }
-    #     self.helper.add_input(Submit("submit", "Submit"))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     class Meta:
         model = EventPage
-        fields = ("link", "description", "start", "end")
+        fields = ("description", "link", "start", "end")
         widgets = {
-            # "link": URLField(),
-            "description": Textarea(attrs={"cols": 80, "rows": 5}),
-            # "start": DateTimeField(),
-            # "end": DateTimeField(),
+            "link": URLInput,
+            "description": Textarea(attrs={"rows": 5}),
+            "start": DateTimeInput,
+            "end": DateTimeInput,
         }
-
-    # def clean_username(self):
-    #     username = self.cleaned_data["username"]
-    #     if len(username) <= 3:
-    #         raise ValidationError("Username is too short")
-    #     return username
-
-    def save(self, commit=True):
-        event = super().save(commit=False)
-
-        if commit:
-            event.save()
-        return event

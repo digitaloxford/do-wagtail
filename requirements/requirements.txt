@@ -2,7 +2,6 @@ wheel
 django-anymail==8.6
 django-allauth==0.51.*
 django-compressor==4.1
-django-crispy-forms~=2.0
 django-sass-processor==1.2.1
 django-htmx~=1.14.0
 django-render-block==0.*

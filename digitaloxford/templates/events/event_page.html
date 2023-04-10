@@ -2,12 +2,12 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}{{ page.title|slugify }}{% endblock %}
+{% block body_class %}page-event {{ page.title|slugify }}{% endblock %}
 
 {% block content %}
     <h1>{{ page.title }}</h1>
-    <p>Event details: <a href="{{page.link}}">{{ page.link }}</a></p>
-    <p>Start: {{ page.start }}</p>
-    <p>End: {{ page.end }}</p>
+    <p>Starts: {{ page.start }}</p>
+    <p>Ends: {{ page.end }}</p>
     <div>{{ page.description|richtext }}</div>
+    <p>Event link: <a href="{{page.link}}">{{ page.link }}</a></p>
 {% endblock %}

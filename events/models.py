@@ -124,17 +124,21 @@ class EventPage(SeoMixin, Page):
     subpage_types = []
 
     description = RichTextField(
-        verbose_name="Long description",
+        verbose_name="Event description",
         features=["h2", "h3", "bold", "italic", "ol", "ul"],
     )
 
-    link = models.URLField()
+    link = models.URLField(
+        verbose_name="Event link",
+    )
 
     start = models.DateTimeField("Starts", blank=False)
 
-    end = models.DateTimeField("End", blank=True, null=True)
+    end = models.DateTimeField("Ends", blank=True, null=True)
 
-    location = models.CharField(max_length=1000, blank=True, null=True)
+    location = models.CharField(
+        verbose_name="Event location (address)", max_length=1000, blank=True, null=True
+    )
 
     tags = ClusterTaggableManager(through="events.EventPageTag", blank=True)
 
@@ -204,6 +208,8 @@ class EventSuggestionPage(SeoMixin, Page):
         FieldPanel("intro", classname="full"),
         FieldPanel("thankyou_page_title"),
     ]
+
+    promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
 
     def serve(self, request):
         from .forms import EventSubmissionForm
