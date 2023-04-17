@@ -1,17 +1,10 @@
+from django.urls import path, reverse
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem
+from wagtail.admin.ui.sidebar import LinkMenuItem as LinkMenuItemComponent
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 
 from .models import JobPage, RecruiterPage
-
-
-# Hide reports and explorer links for non admins
-@hooks.register("construct_main_menu")
-def hide_admin_items_from_users(request, menu_items):
-    if request.user.is_staff is not True:
-        menu_items[:] = [
-            item for item in menu_items if item.name not in ["reports", "explorer"]
-        ]
 
 
 class EditAccountMenuItem(MenuItem):
@@ -21,19 +14,11 @@ class EditAccountMenuItem(MenuItem):
         # Hide from non admin users
         return request.user.is_staff is not True
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        edit_link = "/admin/account"
-        context["url"] = edit_link
-
-        return context
-
 
 @hooks.register("register_admin_menu_item")
 def register_account_menu_item():
     return EditAccountMenuItem(
-        "Account Settings", "edit_link", classnames="icon icon-user", order=100
+        "Account Settings", "/admin/account", classnames="icon icon-user", order=100
     )
 
 
@@ -44,25 +29,28 @@ class EditProfileMenuItem(MenuItem):
         # Hide from non admin users
         return request.user.is_staff is not True
 
-    def get_context(self, request):
-        context = super().get_context(request)
-
+    def render_component(self, request):
+        # Get url to profile page
         edit_link = None
         if request.user.owned_pages.exists():
             for page in request.user.owned_pages.type(RecruiterPage):
                 if page.id:
                     edit_link = "/admin/pages/" + str(page.id) + "/edit/"
 
-        if edit_link:
-            context["url"] = edit_link
-
-        return context
+                    return LinkMenuItemComponent(
+                        self.name,
+                        self.label,
+                        url=edit_link,
+                        icon_name=self.icon_name,
+                        classnames=self.classnames,
+                        attrs=self.attrs,
+                    )
 
 
 @hooks.register("register_admin_menu_item")
 def register_profile_menu_item():
     return EditProfileMenuItem(
-        "Public Profile", "edit_link", classnames="icon icon-view", order=50
+        "Public Profile", "", classnames="icon icon-view", order=50
     )
 
 

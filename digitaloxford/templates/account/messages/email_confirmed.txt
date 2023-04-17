@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans %}You have confirmed <b>{{email}}</b>. An administrator will shortly look over your details and if all is well they will approve your account. This usually doesn't take too long, and you'll be notified by email when it's done. {% endblocktrans %}
+{% blocktrans %}You have confirmed {{email}}. An administrator will shortly look over your details and if all is well they will approve your account. This usually doesn't take too long, and you'll be notified by email when it's done. {% endblocktrans %}

@@ -118,9 +118,9 @@ class LinkPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("link_image", help_text="I dunno, a logo maybe?"),
-        FieldPanel("link", classname="full"),
-        FieldPanel("description", classname="full"),
-        FieldPanel("testimonial", classname="full"),
+        FieldPanel("link"),
+        FieldPanel("description"),
+        FieldPanel("testimonial"),
         MultiFieldPanel(
             [
                 InlinePanel(

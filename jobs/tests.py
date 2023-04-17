@@ -1,11 +1,11 @@
-from wagtail.test.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTestCase
 
 from home.models import BasicPage, HomePage
 
 from .models import JobIndexPage, JobPage, RecruiterPage
 
 
-class JobIndexPageTests(WagtailPageTests):
+class JobIndexPageTests(WagtailPageTestCase):
     def test_can_create_under_home_page(self):
         # You can create a JobIndexPage under the HomePage
         self.assertCanCreateAt(HomePage, JobIndexPage)
@@ -15,7 +15,7 @@ class JobIndexPageTests(WagtailPageTests):
         self.assertCanNotCreateAt(BasicPage, JobIndexPage)
 
 
-class RecruiterPageTests(WagtailPageTests):
+class RecruiterPageTests(WagtailPageTestCase):
     def test_can_create_under_job_index_page(self):
         # You can create a RecruiterPage under a JobIndexPage
         self.assertCanCreateAt(JobIndexPage, RecruiterPage)
@@ -29,7 +29,7 @@ class RecruiterPageTests(WagtailPageTests):
         self.assertAllowedParentPageTypes(RecruiterPage, {JobIndexPage})
 
 
-class JobPageTests(WagtailPageTests):
+class JobPageTests(WagtailPageTestCase):
     def test_can_create_under_recruiter_page(self):
         # You can create a JobPage under a RecruiterPage
         self.assertCanCreateAt(RecruiterPage, JobPage)

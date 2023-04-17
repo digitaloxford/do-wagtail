@@ -1,11 +1,11 @@
-from wagtail.test.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTestCase
 
 from home.models import BasicPage, HomePage
 
 from .models import LinkIndexPage, LinkPage
 
 
-class LinkIndexPageTests(WagtailPageTests):
+class LinkIndexPageTests(WagtailPageTestCase):
     def test_can_create_under_home_page(self):
         # You can create a LinkIndexPage under the HomePage
         self.assertCanCreateAt(HomePage, LinkIndexPage)
@@ -15,7 +15,7 @@ class LinkIndexPageTests(WagtailPageTests):
         self.assertCanNotCreateAt(BasicPage, LinkIndexPage)
 
 
-class LinkPageTests(WagtailPageTests):
+class LinkPageTests(WagtailPageTestCase):
     def test_can_create_under_link_index_page(self):
         # You can create a LinkPage under a LinkIndexPage
         self.assertCanCreateAt(LinkIndexPage, LinkPage)

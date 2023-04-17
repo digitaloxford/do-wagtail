@@ -9,6 +9,15 @@ from wagtail.snippets.wagtail_hooks import SnippetsMenuItem
 from .models import ModelCategory, ModelTag
 
 
+# Hide reports and explorer links for non admins
+@hooks.register("construct_main_menu")
+def hide_admin_items_from_users(request, menu_items):
+    if request.user.is_staff is not True:
+        menu_items[:] = [
+            item for item in menu_items if item.name not in ["reports", "explorer"]
+        ]
+
+
 # Hide default snippets menu as we're recreating it to gain access to custom listing pages
 @hooks.register("construct_main_menu")
 def hide_snippets_menu_item(request, menu_items):

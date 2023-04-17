@@ -108,7 +108,7 @@ class RecruiterPage(SeoMixin, Page):
     city = models.CharField(verbose_name="City", max_length=1024, blank=True, null=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel("description", classname="full"),
+        FieldPanel("description"),
         MultiFieldPanel(
             [
                 FieldPanel("website"),

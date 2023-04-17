@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from taggit.models import Tag as TaggitTag
 from wagtail.admin.panels import FieldPanel
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.images.models import Image
 from wagtail.models import Page
@@ -18,7 +18,7 @@ class BasicPage(SeoMixin, Page):
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel("body", classname="full"),
+        FieldPanel("body"),
     ]
 
     promote_panels = SeoMixin.seo_meta_panels + SeoMixin.seo_menu_panels
@@ -52,7 +52,7 @@ class HomePage(SeoMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("banner_image"),
         FieldPanel("intro", classname="intro"),
-        FieldPanel("body", classname="full"),
+        FieldPanel("body"),
     ]
 
     promote_panels = SeoMixin.seo_panels

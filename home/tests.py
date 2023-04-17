@@ -1,4 +1,4 @@
-from wagtail.test.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTestCase
 
 from jobs.models import JobIndexPage, JobPage
 from links.models import LinkIndexPage, LinkPage
@@ -6,7 +6,7 @@ from links.models import LinkIndexPage, LinkPage
 from .models import BasicPage, HomePage
 
 
-class HomePageTests(WagtailPageTests):
+class HomePageTests(WagtailPageTestCase):
     def test_home_page_subpages(self):
         # A HomePage can only have other BasicPage and *IndexPage children
         self.assertAllowedSubpageTypes(
@@ -18,7 +18,7 @@ class HomePageTests(WagtailPageTests):
         self.assertCanNotCreateAt(BasicPage, HomePage)
 
 
-class BasicPageTests(WagtailPageTests):
+class BasicPageTests(WagtailPageTestCase):
     def test_can_create_under_home_page(self):
         # You can create a BasicPage under a HomePage
         self.assertCanCreateAt(HomePage, BasicPage)
