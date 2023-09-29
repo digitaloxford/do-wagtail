@@ -18,16 +18,16 @@ repos:
     -   id: isort
         args: [--profile, black, --skip, env, --skip-glob, "*/migrations/*", --filter-files]
 -   repo: https://github.com/pycqa/flake8.git
-    rev: 6.0.0
+    rev: 6.1.0
     hooks:
     -   id: flake8
         additional_dependencies:
         - flake8-black>=0.1.1
 -   repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.9.1
     hooks:
     -   id: black
 -   repo: https://github.com/rtts/djhtml
-    rev: 3.0.2
+    rev: 3.0.6
     hooks:
     - id: djhtml
