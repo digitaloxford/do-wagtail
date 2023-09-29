@@ -1,14 +1,26 @@
 from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
+from django.views.generic import TemplateView
 from taggit.models import Tag as TaggitTag
 from wagtail.admin.panels import FieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField
 from wagtail.images.models import Image
-from wagtail.models import Page
+from wagtail.models import Page, Site
 from wagtail.snippets.models import register_snippet
 from wagtailseo.models import SeoMixin
+
+
+class RobotsView(TemplateView):
+    content_type = "text/plain"
+    template_name = "robots.txt"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        request = context["view"].request
+        context["wagtail_site"] = Site.find_for_request(request)
+        return context
 
 
 class BasicPage(SeoMixin, Page):
