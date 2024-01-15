@@ -8,7 +8,7 @@ django-render-block==0.*
 Django~=3.2
 libsass==0.21.*
 psycopg2==2.9.3
-python-dotenv==0.21.0
+python-dotenv~=1.0.0
 wagtail~=4.2.0
 wagtailmenus>=3.1
 wagtail-seo==2.3.*
