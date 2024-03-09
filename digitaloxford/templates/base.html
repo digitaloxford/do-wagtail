@@ -32,7 +32,7 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% comment %} {% wagtailuserbar %} {% endcomment %}
+        {% wagtailuserbar %}
 
         <header class="layout-header">
             <div class="logo">
@@ -65,7 +65,7 @@
 
             <p class="social"><a href="https://mastodon.org.uk/@digitaloxford" rel="me">Find us on Mastodon</a></p>
 
-            <p class="copyright">&copy; Digital Oxford</p>
+            <p class="copyright">&copy; {% now "Y" %} Digital Oxford</p>
         </footer>
 
         {% include "wagtailseo/struct_data.html" %}
@@ -80,7 +80,7 @@
             // Get Alpine to use a valid html custom attribute prefix
             document.addEventListener("alpine:init", () => Alpine.prefix("data-x-"));
         </script>
-        <!-- <script type="text/javascript" src="{% static 'js/site.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'js/site.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

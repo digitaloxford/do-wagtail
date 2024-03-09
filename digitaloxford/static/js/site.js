@@ -1,3 +1,10 @@
+// Do things once everything has loaded in
+window.addEventListener('load', function () {
+    // Remove no-js class
+    let element = document.getElementsByTagName("html");
+    element[0].classList.remove("no-js");
+});
+
 // Thanks to Jeremy Keith's Going Offline book for making this so easy to get my head around.
 // https://adactio.com/journal/13789
 
