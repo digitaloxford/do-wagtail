@@ -1,8 +1,7 @@
 from wagtail.test.utils import WagtailPageTestCase
 
 from home.models import BasicPage, HomePage
-
-from .models import LinkIndexPage, LinkPage
+from links.models import LinkIndexPage, LinkPage
 
 
 class LinkIndexPageTests(WagtailPageTestCase):

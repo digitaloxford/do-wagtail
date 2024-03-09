@@ -1,13 +1,10 @@
 from django.conf import settings
 from django.db import models
 from django.utils.functional import cached_property
-from django.views.generic import TemplateView
 from taggit.models import Tag as TaggitTag
 from wagtail.admin.panels import FieldPanel
-from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField
-from wagtail.images.models import Image
-from wagtail.models import Page, Site
+from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtailseo.models import SeoMixin
 
@@ -81,21 +78,21 @@ class ModelCategory(models.Model):
         FieldPanel("slug"),
     ]
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         ordering = ["name"]
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
-
-@register_snippet
-class ModelTag(TaggitTag):
     def __str__(self):
         return self.name
 
+
+@register_snippet
+class ModelTag(TaggitTag):
     class Meta:
         proxy = True
         verbose_name = "Tag"
         verbose_name_plural = "Tags"
+
+    def __str__(self):
+        return self.name

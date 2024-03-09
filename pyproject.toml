@@ -97,7 +97,7 @@ exclude_lines = [
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "core.settings.test"
+DJANGO_SETTINGS_MODULE = "digitaloxford.settings.dev"
 addopts = "-v --nomigrations"
 # filterwarnings = ["ignore::DeprecationWarning"]
 testpaths = ["tests"]
