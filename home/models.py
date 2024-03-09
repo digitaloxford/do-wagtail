@@ -38,7 +38,7 @@ class BasicPage(SeoMixin, Page):
 
 
 class HomePage(SeoMixin, Page):
-    subpage_types = ["BasicPage", "jobs.JobIndexPage", "links.LinkIndexPage"]
+    subpage_types = ["BasicPage", "links.LinkIndexPage"]
 
     banner_image = models.ForeignKey(
         "wagtailimages.Image",

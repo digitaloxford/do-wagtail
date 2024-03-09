@@ -35,13 +35,6 @@
         {% comment %} {% wagtailuserbar %} {% endcomment %}
 
         <header class="layout-header">
-            <div class="sign-in">
-                {% if user.is_authenticated %}
-                    <p>Hello {{ user.first_name }}: <a href="{% url 'wagtailadmin_home' %}">Go to admin area</a></p>
-                {% else %}
-                    <p><a href="{% url 'account_login' %}">Sign in</a></p>
-                {% endif %}
-            </div>
             <div class="logo">
                 <a href="/"><img src="{% static 'img/logo-do-white.png' %}" alt="Digital Oxford"></a>
             </div>
