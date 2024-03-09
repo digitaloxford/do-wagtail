@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
@@ -20,8 +19,8 @@ urlpatterns = [
     # path("accounts/", include("users.urls")),
     # path("jobs/", include("jobs.urls"), name="jobs"),
     # Service worker
-    url(
-        r"^serviceworker.js",
+    path(
+        r"serviceworker.js",
         (
             TemplateView.as_view(
                 template_name="serviceworker.js",
@@ -31,8 +30,8 @@ urlpatterns = [
         name="serviceworker.js",
     ),
     # Microsoft Tile config
-    url(
-        r"^browserconfig.xml",
+    path(
+        r"browserconfig.xml",
         (
             TemplateView.as_view(
                 template_name="browserconfig.xml",
@@ -44,7 +43,7 @@ urlpatterns = [
     # For anything not caught by a more specific rule above, hand over to
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
-    url(r"", include(wagtail_urls)),
+    path(r"", include(wagtail_urls)),
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:
     #    url(r'^pages/', include(wagtail_urls)),
