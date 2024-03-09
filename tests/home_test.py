@@ -1,7 +1,7 @@
 from wagtail.test.utils import WagtailPageTestCase
 
-from jobs.models import JobIndexPage, JobPage
-from links.models import LinkIndexPage, LinkPage
+from jobs.models import JobIndexPage
+from links.models import LinkIndexPage
 
 from .models import BasicPage, HomePage
 

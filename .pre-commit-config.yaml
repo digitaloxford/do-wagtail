@@ -2,31 +2,38 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
     -   id: check-added-large-files
     -   id: check-merge-conflict
     -   id: debug-statements
-    # -   id: detect-aws-credentials
+    -   id: detect-aws-credentials
+        args: [--allow-missing-credentials]
     -   id: detect-private-key
     -   id: end-of-file-fixer
     -   id: mixed-line-ending
     -   id: trailing-whitespace
--   repo: https://github.com/pycqa/isort
-    rev: 5.12.0
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-builtin-literals
+    -   id: check-case-conflict
+    -   id: check-docstring-first
+    -   id: check-shebang-scripts-are-executable
+    -   id: check-merge-conflict
+    -   id: check-json
+    -   id: check-toml
+    -   id: check-xml
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: destroyed-symlinks
+    -   id: pretty-format-json
+        args: ["--autofix", "--no-ensure-ascii", "--no-sort-keys"]
+    -   id: requirements-txt-fixer
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: "v0.3.2"
     hooks:
-    -   id: isort
-        args: [--profile, black, --skip, env, --skip-glob, "*/migrations/*", --filter-files]
--   repo: https://github.com/pycqa/flake8.git
-    rev: 6.1.0
-    hooks:
-    -   id: flake8
-        additional_dependencies:
-        - flake8-black>=0.1.1
--   repo: https://github.com/psf/black
-    rev: 23.9.1
-    hooks:
-    -   id: black
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
 -   repo: https://github.com/rtts/djhtml
     rev: 3.0.6
     hooks:

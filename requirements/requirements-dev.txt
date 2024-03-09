@@ -1,10 +1,8 @@
 -r requirements.txt
-black
-djhtml
-flake8
-isort
-Werkzeug
-pytest
-pytest-django
 coverage
 django-extensions
+djhtml
+pytest
+pytest-django
+ruff
+Werkzeug

@@ -1,34 +1,104 @@
-[tool.black]
-line-length = 88
-target-version = ['py37']
-include = '\.pyi?$'
-force-exclude = '''
-/(
-    _build
-  | \.direnv
-  | \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.nox
-  | \.svn
-  | \.tox
-  | \.venv
-  | buck-out
-  | build
-  | dist
-  | env
-  | logs
-  | media
-  | migrations
-  | static
-  | venv
-)/
-'''
+[tool.ruff]
+# Assume Python 3.10.
+target-version = "py310"
+line-length = 120
+exclude = [
+    "__pypackages__",
+    "_build",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".env",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "buck-out",
+    "build",
+    "dist",
+    "env",
+    "logs",
+    "manage.py",
+    "media",
+    "migrations",
+    "node_modules",
+    "static",
+    "venv",
+]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-skip="env"
-skip_glob="*/migrations/*"
-filter_files=true
+[tool.ruff.lint]
+# Enable pycodestyle (`E`), Pyflakes (`F`), isort (`I`), and Django (`DJ`) codes by default.
+select = ["E", "F", "I", "DJ"]
+
+ignore = ["E501", "E731", "F403", "F405", "F811", "DJ008"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+
+[tool.ruff.lint.isort]
+# profile = "black"
+# multi_line_output = 3
+# skip = "env"
+# skip_glob = "*/migrations/*"
+# filter_files = true
+
+
+[tool.ruff.lint.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
+
+[tool.coverage.run]
+branch = true
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self.debug:",
+    "if debug:",
+    "if DEBUG:",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if False:",
+    "if __name__ == .__main__.:",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings.test"
+addopts = "-v --nomigrations"
+# filterwarnings = ["ignore::DeprecationWarning"]
+testpaths = ["tests"]
+# markers = ["pytest.mark.django_db"]
