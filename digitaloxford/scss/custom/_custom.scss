@@ -393,14 +393,14 @@ form button {
 /* Jobs */
 body.jobs {
     & .intro {
-       padding: ms(0) ms(0) ms(0) ms(0);
-       margin-bottom: ms(1);
-       border: 1px solid $light-grey;
-       background-color: $lighter-grey;
+        padding: ms(0) ms(0) ms(0) ms(0);
+        margin-bottom: ms(1);
+        border: 1px solid $light-grey;
+        background-color: $lighter-grey;
 
-       & p:last-child {
-           margin-bottom: 0;
-       }
+        & p:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
@@ -560,20 +560,30 @@ footer {
     background-color: $yellow-lighter;
 
     & .social {
-       & a {
-           display: block;
-           padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-           font-size: ms(0);
-           text-decoration: none;
+        & a {
+            display: block;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            font-size: ms(0);
+            text-decoration: none;
 
-           &:hover {
-               text-decoration: underline;
-           }
-       }
+            &:hover {
+                text-decoration: underline;
+            }
+        }
 
-       &.active a {
-           text-decoration: underline;
-       }
+        &.active a {
+            text-decoration: underline;
+        }
+    }
+
+    & .not-by-ai {
+        height: ms(3);
+
+        & a {
+            & img {
+                max-width: 120px;
+            }
+        }
     }
 }
 
