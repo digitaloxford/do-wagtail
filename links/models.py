@@ -1,20 +1,16 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
-from django.db.models import Count
-from django.shortcuts import redirect
 from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.contrib.routable_page.models import RoutablePageMixin
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.search import index
 from wagtailseo.models import SeoMixin
-
-from home.models import ModelCategory
 
 
 class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
@@ -40,9 +36,20 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         context = super().get_context(request, *args, **kwargs)
         context["links_page"] = self
 
+        # Prevent circular import
+        # TODO: I could just define the filter in models.py
+        from .filters import LinkFilter
+
+        links_list = LinkPage.objects.descendant_of(self).live().order_by("title")
+
+        queryset = links_list
+        link_page_filter = LinkFilter(request.GET, queryset=queryset)
+        # filtered_queryset = self.get_links().filter(categories__link_category__slug=category)
+
         # https://docs.djangoproject.com/en/3.1/topics/pagination/#using-paginator-in-a-view-function
-        paginator = Paginator(self.links, 10)
         page = request.GET.get("page")
+        paginator = Paginator(queryset, 10)
+
         try:
             links = paginator.page(page)
         except PageNotAnInteger:
@@ -50,39 +57,31 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         except EmptyPage:
             links = paginator.object_list.none()
 
+        context["filter"] = link_page_filter
         context["links"] = links
-
-        # Get active categories
-        categories = (
-            ModelCategory.objects.annotate(exists=Count("link_pages"))
-            .filter(exists__gt=0)
-            .order_by("name")
-        )
-
-        context["categories"] = categories
 
         return context
 
     def get_links(self):
         return LinkPage.objects.descendant_of(self).live().order_by("title")
 
-    @route(r"^$")
-    def link_list(self, request, *args, **kwargs):
-        self.links = self.get_links()
-        return self.render(request)
+    # @route(r"^$")
+    # def link_list(self, request, *args, **kwargs):
+    #     self.links = self.get_links()
+    #     return self.render(request)
 
-    @route(r"^category/(?P<category>[-\w]+)/$")
-    def post_by_category(self, request, category, *args, **kwargs):
-        category_name = ModelCategory.objects.values_list("name", flat=True).get(
-            slug=category
-        )
+    # @route(r"^category/(?P<category>[-\w]+)/$")
+    # def post_by_category(self, request, category, *args, **kwargs):
+    #     category_name = ModelCategory.objects.values_list("name", flat=True).get(
+    #         slug=category
+    #     )
 
-        self.filter_type = "category"
-        self.filter_slug = category
-        self.filter_term = category_name
-        self.links = self.get_links().filter(categories__link_category__slug=category)
+    #     self.filter_type = "category"
+    #     self.filter_slug = category
+    #     self.filter_term = category_name
+    #     self.links = self.get_links().filter(categories__link_category__slug=category)
 
-        return self.render(request)
+    #     return self.render(request)
 
     @cached_property
     def seo_image_url(self):
@@ -146,12 +145,8 @@ class LinkPage(Page):
 
 
 class LinkPageCategory(models.Model):
-    page = ParentalKey(
-        "links.LinkPage", on_delete=models.CASCADE, related_name="categories"
-    )
-    link_category = models.ForeignKey(
-        "home.ModelCategory", on_delete=models.CASCADE, related_name="link_pages"
-    )
+    page = ParentalKey("links.LinkPage", on_delete=models.CASCADE, related_name="categories")
+    link_category = models.ForeignKey("home.ModelCategory", on_delete=models.CASCADE, related_name="link_pages")
 
     panels = [
         FieldPanel("link_category"),
