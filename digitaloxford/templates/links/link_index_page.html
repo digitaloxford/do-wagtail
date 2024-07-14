@@ -8,17 +8,23 @@
     <h1>{{ page.title }}</h1>
 
     <div class="intro">{{ page.intro|richtext }}</div>
-    <div class="filters">
-        <h2>Filters</h2>
-        <ul class="filter-list list-reset">
-            <li class="filter"><a href="{% pageurl page %}">All</a></li>
-            {% for category in categories %}
-                <li class="filter{% if page.filter_slug == category.slug %} active{% endif %}"><a href="{% pageurl page %}category/{{ category.slug }}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
 
-    {% if page.get_children.count > 0 %}
+    <search role="search">
+        <form
+            action="{{ page.url }}"
+            method="get"
+            class="filter-links"
+        >
+            {{ filter.form.as_p }}
+
+            <button type="submit">Filter</button>
+
+            <div class="htmx-indicator"></div>
+        </form>
+    </search>
+
+
+    {% if links %}
         <ul class="links list-reset">
             {% for link in links %}
                 <li class="link">
