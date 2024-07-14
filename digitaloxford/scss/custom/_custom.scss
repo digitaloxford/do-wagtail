@@ -1,8 +1,4 @@
 html {
-    /*
-    Reset box model to something sensible
-    https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
-    */
     box-sizing: border-box;
 }
 
@@ -135,8 +131,7 @@ table {
 a:link,
 a:visited {
     color: $green;
-    text-decoration-style: underline;
-    text-decoration-thickness: 1px;
+    text-decoration: underline;
 }
 
 a:hover {
@@ -332,9 +327,43 @@ body.home {
     margin-bottom: 1rem;
 }
 
-.button {
-    text-align: center;
+button {
+    color: $green;
+    background-color: $yellow;
+    padding: 4px 15px 2px 15px;
+    border: 1px solid $green;
+
+    &:hover {
+        background-color: $white;
+    }
+
+    &.small {
+        font-size: ms(-1);
+        padding: 4px 10px 2px 10px;
+    }
+
+    &.dismiss {
+        border: none;
+        color: $green;
+        background-color: $light-grey;
+
+        &:hover {
+            background-color: $grey;
+        }
+    }
+
+    &.danger {
+        border: none;
+        color: $messages-error-color;
+        background-color: $messages-error-bg;
+
+        &:hover {
+            color: $messages-error-bg;
+            background-color: $messages-error-color;
+        }
+    }
 }
+
 
 .button a {
     display: block;
@@ -355,27 +384,95 @@ body.home {
 }
 
 /* Forms */
-.signup-form {
-    width: 50%;
-    margin: 0 auto 2rem auto;
+form {
+    margin: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
 
-    & input {
-        width: 100%;
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-start;
     }
-}
 
-form label {
-    display: block;
-    margin-bottom: 5px;
-}
+    & p,
+    & div {
+        margin-bottom: 0;
+    }
 
-form .helptext {
-    font-size: ms(-1);
-    display: block;
-}
+    & label {
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+    }
 
-form button {
-    padding: 1px 15px;
+    & input[type="text"],
+    & select {
+        border: 1px solid $grey;
+        background-color: $white;
+    }
+
+    & .input-container {
+        &.checkbox {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            column-gap: 6px;
+
+            & * {
+                margin: 0 0 0 0;
+            }
+
+            & label {
+                font-weight: normal;
+            }
+        }
+    }
+
+    & .helptext {
+        font-size: ms(0);
+        margin-top: ms(-1);
+        display: block;
+
+        & ul {
+            margin-bottom: ms(0);
+            padding-left: 0;
+            list-style-type: none;
+        }
+    }
+
+    .htmx-indicator {
+        display: none;
+    }
+
+    & .htmx-request .htmx-indicator {
+        display: block;
+        width: ms(3);
+        height: ms(3);
+    }
+
+    & .htmx-request .htmx-indicator:after {
+        content: " ";
+        display: block;
+        width: ms(3);
+        height: ms(3);
+        border-radius: 100%;
+        border: 5px solid $messages-info-color;
+        border-color: $messages-info-color transparent $messages-info-color transparent;
+        animation: rotating-split-ring 2s linear infinite;
+    }
+
+    @keyframes rotating-split-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 }
 
 .errorlist {

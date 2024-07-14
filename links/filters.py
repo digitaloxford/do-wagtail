@@ -15,7 +15,10 @@ category_choice = (
 
 
 class LinkFilter(django_filters.FilterSet):
-    category = django_filters.ChoiceFilter(
+    categories = django_filters.ChoiceFilter(
+        label="Category",
+        empty_label=None,
+        required=False,
         choices=category_choice,
         widget=forms.Select(
             # attrs={
@@ -29,7 +32,7 @@ class LinkFilter(django_filters.FilterSet):
 
     class Meta:
         model = LinkPage
-        fields = ["category"]
+        fields = ["categories"]
 
     # def universal_search(self, queryset, name, value):
     #     return ShutdownIncident.objects.filter(Q(participant__icontains=value))

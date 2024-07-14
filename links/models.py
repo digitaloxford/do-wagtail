@@ -41,14 +41,15 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         from .filters import LinkFilter
 
         links_list = LinkPage.objects.descendant_of(self).live().order_by("title")
+        # categories = request.GET.get("country_code", None)
 
         queryset = links_list
         link_page_filter = LinkFilter(request.GET, queryset=queryset)
-        # filtered_queryset = self.get_links().filter(categories__link_category__slug=category)
+        filtered_queryset = link_page_filter.qs
 
         # https://docs.djangoproject.com/en/3.1/topics/pagination/#using-paginator-in-a-view-function
         page = request.GET.get("page")
-        paginator = Paginator(queryset, 10)
+        paginator = Paginator(filtered_queryset, 10)
 
         try:
             links = paginator.page(page)
@@ -64,24 +65,6 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
 
     def get_links(self):
         return LinkPage.objects.descendant_of(self).live().order_by("title")
-
-    # @route(r"^$")
-    # def link_list(self, request, *args, **kwargs):
-    #     self.links = self.get_links()
-    #     return self.render(request)
-
-    # @route(r"^category/(?P<category>[-\w]+)/$")
-    # def post_by_category(self, request, category, *args, **kwargs):
-    #     category_name = ModelCategory.objects.values_list("name", flat=True).get(
-    #         slug=category
-    #     )
-
-    #     self.filter_type = "category"
-    #     self.filter_slug = category
-    #     self.filter_term = category_name
-    #     self.links = self.get_links().filter(categories__link_category__slug=category)
-
-    #     return self.render(request)
 
     @cached_property
     def seo_image_url(self):
