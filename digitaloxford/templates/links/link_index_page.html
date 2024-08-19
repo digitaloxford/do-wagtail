@@ -9,7 +9,7 @@
 
     <div class="intro">{{ page.intro|richtext }}</div>
 
-    <search role="search">
+    <div class="filters">
         <form
             action="{{ page.url }}"
             method="get"
@@ -24,7 +24,7 @@
             <button type="submit">Filter</button>
             <div class="htmx-indicator"></div>
         </form>
-    </search>
+    </div>
 
     {% if links %}
         {% partialdef links-results inline=True %}
