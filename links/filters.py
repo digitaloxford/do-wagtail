@@ -17,22 +17,13 @@ category_choice = (
 class LinkFilter(django_filters.FilterSet):
     categories = django_filters.ChoiceFilter(
         label="Category",
-        empty_label=None,
+        field_name="categories__link_category__slug",
+        empty_label="(All)",
         required=False,
         choices=category_choice,
-        widget=forms.Select(
-            # attrs={
-            #     "hx-target": "ul.h-feed",
-            #     "hx-swap": "outerHTML",
-            #     "hx-get": reverse_lazy("shutdowns"),
-            #     "hx-push-url": "true",
-            # }
-        ),
+        widget=forms.Select(),
     )
 
     class Meta:
         model = LinkPage
         fields = ["categories"]
-
-    # def universal_search(self, queryset, name, value):
-    #     return ShutdownIncident.objects.filter(Q(participant__icontains=value))

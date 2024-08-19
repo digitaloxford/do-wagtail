@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     # "allauth.socialaccount",
     "anymail",
     "django_htmx",
+    "template_partials",
 ]
 
 MIDDLEWARE = [

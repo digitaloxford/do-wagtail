@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags partials %}
 
 {% block body_class %}{{ page.title|slugify }}{% endblock %}
 
@@ -14,42 +14,39 @@
             action="{{ page.url }}"
             method="get"
             class="filter-links"
+            data-hx-target="ul.links"
+            data-hx-swap="outerHTML"
+            data-hx-get="{{ page.url }}"
+            data-hx-push-url="true"
         >
             {{ filter.form.as_p }}
 
             <button type="submit">Filter</button>
-
             <div class="htmx-indicator"></div>
         </form>
     </search>
 
-
     {% if links %}
-        <ul class="links list-reset">
-            {% for link in links %}
-                <li class="link">
-                    <a href="{{ link.link }}">
+        {% partialdef links-results inline=True %}
+            <ul class="links list-reset">
+                {% for link in links %}
+                    <li class="link">
+                        <a href="{{ link.link }}">
+                            <div class="details">
+                                <h2>{{ link.title }}</h2>
+                                {% if link.description %}
+                                    <p class="description">{{ link.description }}</p>
+                                {% endif %}
 
-                        <div class="details">
-                            <h2>{{ link.title }}</h2>
-
-                            {% if link.description %}
-
-                                <p class="description">{{ link.description }}</p>
-
-                            {% endif %}
-
-                            {% if link.testimonial %}
-
-                                <blockquote>{{ link.testimonial }}</blockquote>
-
-                            {% endif %}
-                        </div>
-                    </a>
-                </li>
-
-            {% endfor %}
-        </ul>
+                                {% if link.testimonial %}
+                                    <blockquote>{{ link.testimonial }}</blockquote>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endpartialdef %}
     {% else %}
         <p>Hmm, there are no links. Possibly something has gone wrong. Sorry about that.</p>
     {% endif %}

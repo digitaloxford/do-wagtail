@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
+from django.shortcuts import render
 from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -16,7 +17,7 @@ from wagtailseo.models import SeoMixin
 class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
     # Set parent_page_types to an empty list to prevent it from
     # being created in the editor interface.
-    # parent_page_types = []
+    parent_page_types = ["home.HomePage"]
     subpage_types = ["LinkPage"]
     max_count = 1
 
@@ -62,6 +63,20 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         context["links"] = links
 
         return context
+
+    def serve(self, request, *args, **kwargs):
+        # Override the Page.serve() method if it's a HTMX request.
+        # In Django this would normally go in your views.py file
+        if request.htmx:
+            context = self.get_context(request, *args, **kwargs)
+            if "links" in context:
+                result_dict = {"links": context["links"]}
+                return render(request, "links/link_index_page.html#links-results", result_dict)
+            else:
+                result_dict = {"links": None}
+                return render(request, "links/link_index_page.html#links-results", result_dict)
+        else:
+            return super().serve(request, *args, **kwargs)
 
     def get_links(self):
         return LinkPage.objects.descendant_of(self).live().order_by("title")
