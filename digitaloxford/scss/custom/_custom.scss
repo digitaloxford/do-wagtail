@@ -128,20 +128,26 @@ table {
 
 /* Sitewide link defaults */
 
-a:link,
+a:link {
+    color: $green;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
 a:visited {
     color: $green;
     text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 a:hover {
-    color: lighten($green, 20%);
+    color: $green;
+    background-color: $yellow;
     text-decoration: underline;
 }
 
 a:active {
     color: $green;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 header {
@@ -222,6 +228,7 @@ ul.navigation {
 
             &:hover {
                 text-decoration: underline;
+                background-color: transparent;
             }
         }
 
@@ -595,24 +602,20 @@ ul.links {
     gap: ms(2);
 
     & .link {
+        & h2 {
+            margin-top: 0;
+            font-size: ms(1);
+            display: inline-block;
+        }
+
         & a {
             display: flex;
             flex-direction: row;
             align-items: start;
             column-gap: ms(2);
-            text-decoration: none;
 
             & figure {
                 flex: 0 0 100px;
-            }
-
-            & h2 {
-                margin-top: 0;
-                font-size: ms(0);
-            }
-
-            &:hover h2 {
-                text-decoration: underline;
             }
         }
     }
