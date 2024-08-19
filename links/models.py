@@ -42,15 +42,13 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         from .filters import LinkFilter
 
         links_list = LinkPage.objects.descendant_of(self).live().order_by("title")
-        # categories = request.GET.get("country_code", None)
 
         queryset = links_list
         link_page_filter = LinkFilter(request.GET, queryset=queryset)
         filtered_queryset = link_page_filter.qs
 
-        # https://docs.djangoproject.com/en/3.1/topics/pagination/#using-paginator-in-a-view-function
         page = request.GET.get("page")
-        paginator = Paginator(filtered_queryset, 10)
+        paginator = Paginator(filtered_queryset, 1000)
 
         try:
             links = paginator.page(page)
@@ -67,13 +65,14 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
     def serve(self, request, *args, **kwargs):
         # Override the Page.serve() method if it's a HTMX request.
         # In Django this would normally go in your views.py file
+
         if request.htmx:
             context = self.get_context(request, *args, **kwargs)
             if "links" in context:
-                result_dict = {"links": context["links"]}
+                result_dict = {"links": context["links"], "filter": context["filter"]}
                 return render(request, "links/link_index_page.html#links-results", result_dict)
             else:
-                result_dict = {"links": None}
+                result_dict = {"links": None, "filter": context["filter"]}
                 return render(request, "links/link_index_page.html#links-results", result_dict)
         else:
             return super().serve(request, *args, **kwargs)
