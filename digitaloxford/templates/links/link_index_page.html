@@ -34,7 +34,7 @@
                         <h2><a href="{{ link.link }}">{{ link.title }}</a></h2>
                         {% if link.categories %}
                             <div class="categories">
-                                <h3>Categories:</h3>
+                                <h3>Categor{{ link.categories.count|pluralize:"y,ies" }}:</h3>
                                 <ul class="list-reset list-inline">
                                     {% for category in link.prefetched_categories %}
                                         <li><a href="{{ page.url }}?category={{ category.link_category.slug }}">{{ category.link_category.name }}</a></li>
