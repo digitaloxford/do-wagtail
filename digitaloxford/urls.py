@@ -10,8 +10,8 @@ from home.views import RobotsView
 from search import views as search_views
 
 urlpatterns = [
-    path("django-admin/", admin.site.urls),
-    path("admin/", include(wagtailadmin_urls)),
+    path("django-spires/", admin.site.urls),
+    path("spires/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("robots.txt", RobotsView.as_view()),

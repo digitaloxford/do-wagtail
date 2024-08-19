@@ -15,7 +15,7 @@ category_choice = (
 
 
 class LinkFilter(django_filters.FilterSet):
-    categories = django_filters.ChoiceFilter(
+    category = django_filters.ChoiceFilter(
         label="Category",
         field_name="categories__link_category__slug",
         empty_label="-- All --",
@@ -26,4 +26,4 @@ class LinkFilter(django_filters.FilterSet):
 
     class Meta:
         model = LinkPage
-        fields = ["categories"]
+        fields = ["category"]

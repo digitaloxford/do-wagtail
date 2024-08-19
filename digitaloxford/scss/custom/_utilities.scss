@@ -1,0 +1,25 @@
+/* Utilities */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.list-reset {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    list-style-type: none;
+}
+
+.list-inline {
+    display: flex;
+    flex-direction: row;
+    column-gap: ms(-1)
+}

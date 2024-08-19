@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import models
+from django.db.models import Prefetch
 from django.shortcuts import render
 from django.utils.functional import cached_property
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -41,7 +42,13 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         # TODO: I could just define the filter in models.py
         from .filters import LinkFilter
 
-        links_list = LinkPage.objects.descendant_of(self).live().order_by("title")
+        links_list = LinkPage.objects.descendant_of(self).live().order_by("title").prefetch_related(
+            Prefetch(
+                'categories',
+                queryset=LinkPageCategory.objects.select_related('link_category'),
+                to_attr='prefetched_categories'
+            )
+        )
 
         queryset = links_list
         link_page_filter = LinkFilter(request.GET, queryset=queryset)

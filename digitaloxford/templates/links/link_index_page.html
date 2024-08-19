@@ -41,6 +41,17 @@
                                 <blockquote>{{ link.testimonial }}</blockquote>
                             {% endif %}
                         </div>
+                        {% if link.categories %}
+                            <div class="categories">
+                                <h3>Categories:</h3>
+                                <ul class="list-reset list-inline">
+                                    {% for category in link.prefetched_categories %}
+                                        <li><a href="{{ page.url }}?category={{ category.link_category.slug }}">{{ category.link_category.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
                     </li>
                 {% endfor %}
             </ul>
