@@ -158,41 +158,15 @@ header {
     color: $white;
     background-color: $green;
 
-    & .sign-in {
-        font-size: ms(-1);
-        margin: 0 0 0 0;
-        align-self: flex-end;
-        text-align: right;
-
-        & p {
-            margin: 0 0 0 0;
-
-            & a {
-
-                &:link,
-                &:visited {
-                    color: $white;
-                    text-decoration: underline;
-                }
-
-                &:hover {
-                    color: lighten($green, 50%);
-                }
-
-                &:active {
-                    color: $green;
-                    text-decoration: none;
-                }
-            }
-        }
-
-    }
-
     & .logo {
         width: 6rem;
 
         & a {
             display: block;
+
+            &:hover {
+                background-color: transparent;
+            }
 
             & img {
                 max-width: 100%;
@@ -668,6 +642,7 @@ footer {
 
             &:hover {
                 text-decoration: underline;
+                background-color: transparent;
             }
         }
 
