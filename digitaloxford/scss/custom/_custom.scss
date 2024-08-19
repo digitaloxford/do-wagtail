@@ -578,6 +578,7 @@ ul.links {
     & .link {
         & h2 {
             margin-top: 0;
+            margin-bottom: ms(-1);
             font-size: ms(1);
             display: inline-block;
         }
@@ -593,23 +594,19 @@ ul.links {
             }
         }
 
-        & .details *:last-child {
-            margin-bottom: ms(-1);
-        }
-
         & .categories {
-            border-top: 1px solid $light-grey;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             column-gap: ms(-1);
             font-size: ms(0);
+            margin-bottom: ms(-1);
 
             & h3 {
                 margin: 0 0 0 0;
                 padding: 0 0 0 0;
                 font-size: ms(0);
-                font-weight: bold;
+                color: $dark-grey;
             }
         }
     }
