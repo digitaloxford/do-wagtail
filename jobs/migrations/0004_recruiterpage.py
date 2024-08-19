@@ -3,7 +3,6 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import wagtail.fields
-import wagtailmetadata.models
 
 
 class Migration(migrations.Migration):
@@ -31,6 +30,6 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['title'],
             },
-            bases=(wagtailmetadata.models.WagtailImageMetadataMixin, 'wagtailcore.page', models.Model),
+            bases=('wagtailcore.page', models.Model),
         ),
     ]

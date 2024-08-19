@@ -1,11 +1,11 @@
 Django~=4.2.0
-django-allauth==0.51.*
-django-anymail==8.6
-django-compressor~=4.4.0
+django-allauth==64.1.0
+django-anymail==11.1
+django-compressor~=4.5.0
 django-filter==23.5
-django-htmx~=1.17.0
-django-render-block==0.*
+django-htmx~=1.19.0
 django-sass-processor==1.2.1
+django-template-partials==24.2
 django_csp==3.8
 django_extensions
 libsass~=0.23.0
