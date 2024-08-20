@@ -231,6 +231,11 @@ ul.navigation {
     }
 }
 
+.intro {
+    padding: ms(0) ms(0) ms(0) ms(0);
+    font-size: ms(1);
+}
+
 body.home {
     & .layout-main {
         margin-top: 0;
