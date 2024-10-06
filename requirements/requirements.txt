@@ -8,9 +8,11 @@ django-sass-processor==1.2.1
 django-template-partials==24.2
 django_csp==3.8
 django_extensions
+icalendar~=6.0.0
 libsass~=0.23.0
 psycopg2~=2.9.0
 python-dotenv~=1.0.0
+requests~=2.32.0
 wagtail~=5.2.0
 wagtail-modeladmin~=2.0.0
 wagtail-seo~=2.5.0

@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     # "allauth",
     # "allauth.account",
     # "allauth.socialaccount",
-    "anymail",
+    # "anymail",
     "django_htmx",
     "template_partials",
 ]
