@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     "search",
     "users",
     "links",
-    "jobs",
     "wagtailseo",
     "wagtail_modeladmin",
     "wagtail.contrib.settings",
@@ -62,10 +61,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.sites",
     "django.contrib.staticfiles",
-    # "allauth",
-    # "allauth.account",
-    # "allauth.socialaccount",
-    "anymail",
     "django_htmx",
     "template_partials",
 ]
@@ -300,29 +295,3 @@ LOGGING = {
         },
     },
 }
-
-# django-allauth
-# AUTHENTICATION_BACKENDS = [
-#     # Needed to login by username in Django admin, regardless of `allauth`
-#     "django.contrib.auth.backends.ModelBackend",
-#     # `allauth` specific authentication methods, such as login by e-mail
-#     "allauth.account.auth_backends.AuthenticationBackend",
-# ]
-# ACCOUNT_FORMS = {
-#     "signup": "jobs.forms.RecruiterRegistrationForm",
-# }
-# ACCOUNT_ADAPTER = "allauth.account.adapter.DefaultAccountAdapter"
-# ACCOUNT_AUTHENTICATION_METHOD = "email"
-# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/"
-# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300
-# ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
-# ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
-# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-# ACCOUNT_USER_DISPLAY = lambda user: user.display_name
-# ACCOUNT_UNIQUE_EMAIL = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# LOGIN_REDIRECT_URL = "/"

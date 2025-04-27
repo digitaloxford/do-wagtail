@@ -43,11 +43,3 @@ TEMPLATES = [
 #         'LOCATION': '127.0.0.1:11211',
 #     }
 # }
-
-# django-anymail
-EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
-
-ANYMAIL = {
-    "MAILJET_API_KEY": os.getenv("MAILJET_API_KEY", None),
-    "MAILJET_SECRET_KEY": os.getenv("MAILJET_SECRET_KEY", None),
-}

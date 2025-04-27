@@ -15,9 +15,6 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("robots.txt", RobotsView.as_view()),
-    # path("accounts/", include("allauth.urls")),
-    # path("accounts/", include("users.urls")),
-    # path("jobs/", include("jobs.urls"), name="jobs"),
     # Service worker
     path(
         r"serviceworker.js",
