@@ -71,17 +71,13 @@
         </footer>
 
         {% include "wagtailseo/struct_data.html" %}
+        {% include "wagtailseo/struct_org_data.html" %}
 
         {% block extra_struct_data %}
         {% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/alpine.min.js' %}" defer></script>
         <script type="text/javascript" src="{% static 'js/htmx.min.js' %}" defer></script>
-        <script>
-            // Get Alpine to use a valid html custom attribute prefix
-            document.addEventListener("alpine:init", () => Alpine.prefix("data-x-"));
-        </script>
         <script type="text/javascript" src="{% static 'js/site.js' %}"></script>
 
         {% block extra_js %}

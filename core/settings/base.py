@@ -37,11 +37,12 @@ INSTALLED_APPS = [
     "users",
     "links",
     "wagtailseo",
-    "wagtail_modeladmin",
     "wagtail.contrib.settings",
     "wagtailmenus",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.search_promotions",
+    "wagtail.contrib.styleguide",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -204,6 +205,8 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+# Django 6 preperation
+FORMS_URLFIELD_ASSUME_HTTPS = True
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = "digitaloxford"
@@ -241,12 +244,6 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-PASSWORD_REQUIRED_TEMPLATE = "home/password_required.html"
-WAGTAIL_USER_CREATION_FORM = "users.forms.WagtailUserCreationForm"
-WAGTAIL_USER_EDIT_FORM = "users.forms.WagtailUserEditForm"
-WAGTAIL_USER_CUSTOM_FIELDS = [
-    "display_name",
-]
 WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = "hello@digitaloxford.com"
 
 # Django-taggit configuration
@@ -254,44 +251,44 @@ TAG_LIMIT = 6
 TAGGIT_CASE_INSENSITIVE = True
 
 # Logging
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "standard": {
-            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            "datefmt": "%Y-%m-%d %H:%M:%S",
-        },
-    },
-    "handlers": {
-        "logfile": {
-            "level": "DEBUG",
-            "class": "logging.handlers.RotatingFileHandler",
-            "filename": BASE_DIR + "/logs/djangolog.txt",
-            "maxBytes": 50000,
-            "backupCount": 2,
-            "formatter": "standard",
-        },
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "standard",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "propagate": True,
-            "level": "WARN",
-        },
-        "django.db.backends": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
-        },
-        "": {
-            "handlers": ["console", "logfile"],
-            "level": "DEBUG",
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "standard": {
+#             "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+#             "datefmt": "%Y-%m-%d %H:%M:%S",
+#         },
+#     },
+#     "handlers": {
+#         "logfile": {
+#             "level": "DEBUG",
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "filename": BASE_DIR + "/logs/djangolog.txt",
+#             "maxBytes": 50000,
+#             "backupCount": 2,
+#             "formatter": "standard",
+#         },
+#         "console": {
+#             "level": "INFO",
+#             "class": "logging.StreamHandler",
+#             "formatter": "standard",
+#         },
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console"],
+#             "propagate": True,
+#             "level": "WARN",
+#         },
+#         "django.db.backends": {
+#             "handlers": ["console"],
+#             "level": "DEBUG",
+#             "propagate": False,
+#         },
+#         "": {
+#             "handlers": ["console", "logfile"],
+#             "level": "DEBUG",
+#         },
+#     },
+# }
