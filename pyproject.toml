@@ -1,6 +1,6 @@
 [tool.ruff]
-# Assume Python 3.10.
-target-version = "py310"
+# Assume Python 3.11.
+target-version = "py311"
 line-length = 120
 exclude = [
     "__pypackages__",
@@ -97,7 +97,7 @@ exclude_lines = [
 ]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "digitaloxford.settings.dev"
+DJANGO_SETTINGS_MODULE = "core.settings.dev"
 addopts = "-v --nomigrations"
 # filterwarnings = ["ignore::DeprecationWarning"]
 testpaths = ["tests"]

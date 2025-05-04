@@ -1,5 +1,5 @@
 # Local environment settings
-digitaloxford/settings/local.py
+core/settings/local.py
 
 # Installer logs
 pip-log.txt

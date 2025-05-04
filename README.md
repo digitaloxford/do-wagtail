@@ -5,7 +5,7 @@ The repository for the [Wagtail](https://docs.wagtail.io/en/stable/index.html) p
 
 ## Notes
 
-- Requires Python 3.*
+- Requires Python 3.11 or newer
 - This project uses [django-sass-processor](https://github.com/jrief/django-sass-processor) to manage scss files. Refer to that repository's README for instructions on how to manage the files.
 
 ## Local setup
@@ -33,7 +33,7 @@ $ pip install -r requirements/requirements-dev.txt
 
 ### Pre-commit hooks
 
-This repository uses the [pre-commit](https://pre-commit.com/) framework to perform certain sanity checks during development. These include code formatting with [Black](https://black.readthedocs.io/en/stable/index.html) and [DjHTML](https://github.com/rtts/djhtml), import sorting with [isort](https://pycqa.github.io/isort/index.html), and detecting any private keys you may have accidentally added to the repository. For a full list see the file `<install-directory>/.pre-commit-config.yaml`.
+This repository uses the [pre-commit](https://pre-commit.com/) framework to perform certain sanity checks during development. These include code formatting with [Ruff](https://docs.astral.sh/ruff/) and [DjHTML](https://github.com/rtts/djhtml), and detecting any private keys you may have accidentally added to the repository. For a full list see the file `<install-directory>/.pre-commit-config.yaml`.
 
 Run pre-commit install to set up the git hook scripts
 
@@ -45,18 +45,62 @@ Now pre-commit will run automatically on git commit.
 
 ### Configuration
 
-Create a local environment file by copying `<install-directory>/home/.env_example` to `<install-directory>/home/.env` and filling out the details.
+Create a local environment file by copying `<install-directory>/core/.env_example` to `<install-directory>/core/.env` and filling out the details.
 
 Run the migrations and create the superuser:
 
 ```
-$ ./manage.py makemigrations
-$ ./manage.py migrate
-$ ./manage.py createsuperuser
+$ python manage.py makemigrations
+$ python manage.py migrate
+$ python manage.py createsuperuser
 ```
 
 Finally, start the development server:
 
 ```
-$ ./manage.py runserver_plus
+$ python manage.py runserver_plus
+```
+
+## Deployment
+
+Change to the installation directory:
+
+```
+$ cd /path/to/install
+```
+
+Activate the server python environment:
+
+```
+$ source .venv/bin.activate
+```
+
+Checkout the latest code:
+
+```
+$ git pull
+```
+
+Run any migrations:
+
+```
+$ python manage.py migrate
+```
+
+Compile the SCSS:
+
+```
+$ python manage.py compilescss
+```
+
+Collect the static assets:
+
+```
+$ python manage.py collectstatic
+```
+
+Trigger the web server to reload the files (in this case updating the access time on the `wsgi` file will update Apache)
+
+```
+$ touch core/wsgi.py
 ```
