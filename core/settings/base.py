@@ -251,42 +251,42 @@ TAG_LIMIT = 6
 TAGGIT_CASE_INSENSITIVE = True
 
 # Logging
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "formatters": {
-#         "standard": {
-#             "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-#             "datefmt": "%Y-%m-%d %H:%M:%S",
-#         },
-#     },
-#     "handlers": {
-#         "logfile": {
-#             "level": "DEBUG",
-#             "class": "logging.FileHandler",
-#             "filename": BASE_DIR + "/logs/djangolog.txt",
-#             "formatter": "standard",
-#         },
-#         "console": {
-#             "level": "INFO",
-#             "class": "logging.StreamHandler",
-#             "formatter": "standard",
-#         },
-#     },
-#     "loggers": {
-#         "django": {
-#             "handlers": ["console"],
-#             "propagate": True,
-#             "level": "WARN",
-#         },
-#         "django.db.backends": {
-#             "handlers": ["console"],
-#             "level": "DEBUG",
-#             "propagate": False,
-#         },
-#         "": {
-#             "handlers": ["console", "logfile"],
-#             "level": "DEBUG",
-#         },
-#     },
-# }
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+    },
+    "handlers": {
+        "logfile": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR + "/logs/django.log",
+            "formatter": "standard",
+        },
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "propagate": True,
+            "level": "WARN",
+        },
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "": {
+            "handlers": ["console", "logfile"],
+            "level": "DEBUG",
+        },
+    },
+}
