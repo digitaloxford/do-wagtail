@@ -1,5 +1,5 @@
 -r requirements.txt
-pytest
-pytest-django
 coverage
 factory-boy
+pytest
+pytest-django

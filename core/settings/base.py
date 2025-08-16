@@ -250,6 +250,9 @@ WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = "hello@digitaloxford.com"
 TAG_LIMIT = 6
 TAGGIT_CASE_INSENSITIVE = True
 
+# Silence wagtailmenu admin panel warnings
+SILENCED_SYSTEM_CHECKS = ["wagtailadmin.W002", "RemovedInWagtail80Warning"]
+
 # Logging
 LOGGING = {
     "version": 1,
