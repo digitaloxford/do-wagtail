@@ -42,11 +42,16 @@ class LinkIndexPage(RoutablePageMixin, SeoMixin, Page):
         # TODO: I could just define the filter in models.py
         from .filters import LinkFilter
 
-        links_list = LinkPage.objects.descendant_of(self).live().order_by("title").prefetch_related(
-            Prefetch(
-                'categories',
-                queryset=LinkPageCategory.objects.select_related('link_category'),
-                to_attr='prefetched_categories'
+        links_list = (
+            LinkPage.objects.descendant_of(self)
+            .live()
+            .order_by("title")
+            .prefetch_related(
+                Prefetch(
+                    "categories",
+                    queryset=LinkPageCategory.objects.select_related("link_category"),
+                    to_attr="prefetched_categories",
+                )
             )
         )
 
