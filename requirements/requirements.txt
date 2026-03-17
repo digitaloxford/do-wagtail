@@ -8,8 +8,6 @@ django-sass-processor~=1.4.0
 django-template-partials==25.3
 django_extensions
 libsass~=0.23.0
-psycopg~=3.3.0
-psycopg-binary~=3.3.0
 python-dotenv~=1.2.0
 wagtail~=7.2.0
 wagtail-seo~=3.1.0
