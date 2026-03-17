@@ -12,14 +12,16 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from pathlib import Path
 
+from dj_lite import sqlite_config
 from dotenv import load_dotenv
 
 # Because this always trips me up:
 # BASE_DIR is where manage.py lives
 # PROJECT_ROOT is BASE_DIR + your_project_name (where settings.py lives).
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
+PROJECT_DIR = Path(__file__).resolve(strict=True).parent.parent
+BASE_DIR = PROJECT_DIR.parent
 
 dotenv_path = os.path.join(PROJECT_DIR, ".env")
 load_dotenv(dotenv_path)
@@ -105,22 +107,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#     }
-# }
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", None),
-        "USER": os.getenv("DB_USER", None),
-        "PASSWORD": os.getenv("DB_PASSWORD", None),
-        "HOST": os.getenv("DB_HOST", None),
-        "PORT": os.getenv("DB_PORT", None),
-    }
+    "default": sqlite_config(BASE_DIR),
 }
 
 # Explicitly set primary keys for Django 3.2 upgrade
@@ -216,6 +205,9 @@ WAGTAIL_SITE_NAME = "digitaloxford"
 BASE_URL = "https://digitaloxford.com"
 WAGTAILADMIN_BASE_URL = "https://digitaloxford.com"
 
+# Disable admin comments
+WAGTAILADMIN_COMMENTS_ENABLED = False
+
 # Custom settings
 DATE_FORMAT = "jS F Y"
 
@@ -267,7 +259,7 @@ LOGGING = {
         "logfile": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": BASE_DIR + "/logs/django.log",
+            "filename": BASE_DIR / "logs/django.log",
             "formatter": "standard",
         },
         "console": {
