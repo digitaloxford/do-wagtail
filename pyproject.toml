@@ -71,31 +71,6 @@ line-ending = "auto"
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 
-[tool.coverage.run]
-branch = true
-omit = ["tests/*"]
-
-[tool.coverage.report]
-exclude_lines = [
-    # Have to re-enable the standard pragma
-    "pragma: no cover",
-
-    # Don't complain about missing debug-only code:
-    "def __repr__",
-    "if self.debug:",
-    "if debug:",
-    "if DEBUG:",
-
-    # Don't complain if tests don't hit defensive assertion code:
-    "raise AssertionError",
-    "raise NotImplementedError",
-
-    # Don't complain if non-runnable code isn't run:
-    "if 0:",
-    "if False:",
-    "if __name__ == .__main__.:",
-]
-
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "core.settings.dev"
 addopts = "-v --nomigrations"

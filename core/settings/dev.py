@@ -10,7 +10,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ADMINS = []
 
-INSTALLED_APPS += ["django_extensions", "coverage"]
+INSTALLED_APPS += ["django_extensions"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
